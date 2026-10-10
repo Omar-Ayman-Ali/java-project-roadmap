@@ -1,41 +1,101 @@
-# 05 · Student Registry
+# Student Registry (Object Lifecycle and Constructor Design)
 
-**Unlocked by:** L02 (classes, objects, constructors) · **Difficulty:** ★★☆☆☆ · **Time:** ~3-4 hours
+**Live Demo:** Not deployed (local execution only)
 
-## Goal
-Your first real class. Model a `Student`, store many of them in an array, and manage them from a `main` driver.
+An object-oriented student records system practicing class blueprint instantiation, constructor overloading, and reference array null-safety.
 
-## Concepts you'll practice
-- A class is a blueprint, and an object is an instance created with `new`
-- Fields (state) and methods (behaviour)
-- Constructors: same name as the class, no return type
-- Overloaded constructors, and the **default constructor disappearing** once you write any constructor
-- The dot operator: `student.addMarks(10.5f)`
-- Object arrays hold references, so `new Student[5]` is five `null`s
+![Language](https://img.shields.io/badge/Language-Java_21-orange?style=flat-square)
+![Scope](https://img.shields.io/badge/Course-CIS_201_L02-blue?style=flat-square)
+![Build](https://img.shields.io/badge/Build-javac_CLI-green?style=flat-square)
 
-## Requirements
-- [ ] `Student` has fields `name`, `id`, `marks`.
-- [ ] Two constructors: `Student(String name, int id)` and `Student(String name, int id, float marks)`.
-- [ ] Methods: `addMarks(float)` (returns new total), `isPassing()` (marks >= 50), `toString()`.
-- [ ] `Registry` driver holds a `Student[]` and supports add, find by id, list all, and print the top student.
-- [ ] Demonstrate the `null` problem: access an empty slot, catch what happens, and write about it in `NOTES.md`.
+## Table of Contents
+- [About](#about)
+- [Architecture](#architecture)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Run Locally](#run-locally)
+- [Project Structure](#project-structure)
+- [Hints](#hints)
 
-## Milestones
-1. `Student` class + one constructor, create one object in `main`.
-2. Second constructor, so you can see overloading.
-3. Remove all constructors and see the compiler's default one. Add a parameterised one and try `new Student()`. Read the error.
-4. The array-backed registry.
-5. Sort the registry by marks.
+## About
+This project models an academic student registry using Object-Oriented Programming foundations taught in Lecture 2. It demonstrates how classes act as blueprints for instantiated heap objects with private state and public behaviors. The registry coordinator stores instances inside reference arrays while enforcing defensive null checks.
 
-## Stretch goals
-- `equals`-style comparison by id (just a method for now).
-- Draw the UML box for `Student` (3 compartments, `+ # -`).
+## Architecture
+The system consists of two cooperating classes:
+- **`Student` (Entity)**: Encapsulates individual student state (`name`, `id`, `marks`), overloaded constructors, and pass/fail evaluation logic.
+- **`StudentRegistry` (Coordinator)**: Maintains an array of `Student` references (`Student[]`), providing lookup, insertion, and aggregation methods.
 
-## Done when
-- [ ] You can explain exactly when Java gives you a default constructor
-- [ ] You can explain why `Student[] roster = new Student[5]; roster[0].addMarks(1)` fails
-- [ ] You drew the UML before writing the code, or at least after
+```
++-----------------------------------+        holds references       +-----------------------------------+
+|          StudentRegistry          | ----------------------------> |              Student              |
++-----------------------------------+  1                      0..N  +-----------------------------------+
+| - students: Student[]             |                               | - name: String                    |
+| - count: int                      |                               | - id: int                         |
++-----------------------------------+                               | - marks: float                    |
+| + addStudent(s: Student): boolean |                               +-----------------------------------+
+| + findById(id: int): Student      |                               | + Student(name, id)               |
+| + getTopStudent(): Student        |                               | + Student(name, id, marks)        |
+| + listAll(): void                 |                               | + addMarks(m: float): float       |
++-----------------------------------+                               | + isPassing(): boolean            |
+                                                                    +-----------------------------------+
+```
+
+## Features
+- **Constructor Overloading**: Provides flexible object instantiation with 2-parameter and 3-parameter constructor variants.
+- **Constructor Chaining**: Reuses initialization logic via `this(...)` to guarantee invariant consistency.
+- **Instance State Mutation**: Adjusts student marks dynamically via public member methods.
+- **Sequential Search**: Locates specific student records by integer identifier in linear time.
+- **Top Performer Discovery**: Scans registered student instances to locate the highest academic score.
+- **Null Reference Guarding**: Safely inspects sparse array structures without causing `NullPointerException` failures.
+
+### What You Need To Do
+- [x] Create a `Student` entity class with fields `name`, `id`, and `marks`.
+- [x] Implement overloaded constructors `Student(String, int)` and `Student(String, int, float)`.
+- [x] Implement member methods `addMarks`, `isPassing` (threshold >= 50.0), and a formatted `toString`.
+- [x] Create `StudentRegistry` holding a `Student[]` array of defined capacity with an active count variable.
+- [x] Implement registry functions for insertion, identification by ID, listing, and top student search.
+- [x] Guard all array access loops against uninitialized `null` slots.
+
+## Tech Stack
+- **Language**: Java 21 (LTS)
+- **Toolchain**: OpenJDK `javac` and `java`
+- **Libraries**: `java.lang.Math`, `java.lang.String`
+
+## Run Locally
+
+### Prerequisites
+- OpenJDK 17 or 21:
+  ```bash
+  javac -version
+  ```
+
+### Installation
+Clone the repository and enter the project directory:
+```bash
+git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
+cd java-project-roadmap/projects/05-student-registry
+```
+
+### Execution
+Compile the classes and run the driver:
+```bash
+mkdir -p bin
+javac -d bin src/*.java
+java -cp bin StudentRegistry
+```
+
+## Project Structure
+```
+05-student-registry/
+├── README.md
+└── src/
+    ├── Student.java
+    └── StudentRegistry.java
+```
 
 ## Hints
-- `this.name = name;` resolves the clash when a parameter has the same name as a field.
-- Overloaded constructors can share work, but you'll meet `this(...)` properly later. For now, duplicate the assignments.
+- Writing any custom constructor removes the default no-argument constructor generated by the Java compiler.
+- Use `this(name, id, 0.0f);` inside the two-parameter constructor to delegate initialization to the three-parameter constructor.
+- When an object array is created (`new Student[5]`), all 5 slots initially store `null` references, not `Student` objects.
+- Attempting to invoke a method on an unassigned slot like `students[i].getMarks()` throws a `NullPointerException`.
+- Always verify `students[i] != null` or constrain loop bounds strictly to `i < count`.

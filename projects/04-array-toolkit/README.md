@@ -1,43 +1,98 @@
-# 04 · Array Toolkit
+# Array Toolkit (Memory and Reference Operations)
 
-**Unlocked by:** L02 (arrays) · **Difficulty:** ★★☆☆☆ · **Time:** ~3 hours
+**Live Demo:** Not deployed (local execution only)
 
-## Goal
-Write a small library of array utilities and a test `main` that exercises each one. The point is to feel exactly how Java arrays behave: fixed size, reference semantics, default values.
+A utility library demonstrating Java array reference semantics, deep cloning, boundary searches, and in-place sorting.
 
-## Concepts you'll practice
-- Declaring arrays: `new float[10]` vs `new float[]{1.2F, 3.4F}`
-- Primitive arrays default to `0`/`0.0`/`false`; object arrays default to `null`
-- Arrays are references, so assigning one to another variable doesn't copy it
-- Foreach for reading, indexed `for` for writing
+![Language](https://img.shields.io/badge/Language-Java_21-orange?style=flat-square)
+![Scope](https://img.shields.io/badge/Course-CIS_201_L02-blue?style=flat-square)
+![Build](https://img.shields.io/badge/Build-javac_CLI-green?style=flat-square)
 
-## Requirements
-Implement each as a `static` method in `ArrayToolkit.java` (plain static methods are fine for now):
-- [ ] `int max(int[] a)` and `int min(int[] a)`
-- [ ] `double average(int[] a)`
-- [ ] `int[] reverse(int[] a)` returns a **new** array
-- [ ] `int indexOf(int[] a, int target)` returns -1 if not found
-- [ ] `int[] copy(int[] a)` (a real copy, not an alias)
-- [ ] `void bubbleSort(int[] a)`
-- [ ] `String[] names = new String[5]`: print it right after creation and observe the `null`s
+## Table of Contents
+- [About](#about)
+- [Architecture](#architecture)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Run Locally](#run-locally)
+- [Project Structure](#project-structure)
+- [Hints](#hints)
 
-## Milestones
-1. min / max / average.
-2. indexOf and reverse.
-3. Demonstrate aliasing: `int[] b = a; b[0] = 99;` then print `a[0]`. Explain it in `NOTES.md`.
-4. copy, then show that changing the copy leaves the original alone.
-5. bubbleSort.
+## About
+This project implements a foundational static utility toolkit exploring array data structure mechanics in Java. It provides essential algorithms for extremum detection, linear search, inversion, deep duplication, and bubble sort ordering. The driver illustrates the distinction between reference aliasing and heap memory cloning.
 
-## Stretch goals
-- Binary search (on a sorted array).
-- 2D array: matrix transpose.
-- Rotate an array by `k` positions in place.
+## Architecture
+Arrays in Java are first-class heap objects manipulated through reference variables located on the method stack frame.
 
-## Done when
-- [ ] You can state the default value of every element in `new boolean[3]`, `new double[3]` and `new String[3]`
-- [ ] You can explain the aliasing demo without looking anything up
-- [ ] Every method handles an empty array without crashing (decide what "max of empty" should do)
+```
+Stack Frame (main)                    Heap Memory
++-----------------------+             +-------------------------------+
+| sample  (reference)   | ----------> | [ 42, 17, 89, 5, 23, 68, 12 ] |
++-----------------------+             +-------------------------------+
+| alias   (reference)   | -------------^  (Points to identical heap object)
++-----------------------+
+| cloned  (reference)   | ----------> +-------------------------------+
++-----------------------+             | [ 42, 17, 89, 5, 23, 68, 12 ] | (Independent allocation)
+                                      +-------------------------------+
+```
+
+When one array variable is assigned to another (`alias = sample`), only the pointer address is duplicated. Generating a separate instance requires allocating a new heap array (`copy(sample)`) and duplicating each element sequentially.
+
+## Features
+- **Extremum Detection**: Identifies maximum and minimum elements across integer sequences.
+- **Statistical Computation**: Computes exact floating-point arithmetic means.
+- **Pure Array Reversal**: Constructs and returns a new inverted array without mutating input operands.
+- **Linear Search**: Scans for target elements and returns zero-based indices or -1 on absence.
+- **Deep Memory Cloning**: Duplicates array contents into distinct heap allocations.
+- **Bubble Sort Ordering**: Sorts arrays in-place in ascending order with early-termination optimization.
+- **Default Value Audit**: Demonstrates Java runtime default initialization for primitive types and object reference arrays.
+
+### What You Need To Do
+- [x] Implement static routines `max`, `min`, and `average` for non-empty integer arrays.
+- [x] Implement `reverse` returning an independent inverted array instance.
+- [x] Implement `indexOf` returning the first matching element index or -1.
+- [x] Implement `copy` to construct an isolated deep copy of an array.
+- [x] Implement an in-place `bubbleSort` routine.
+- [x] Create a `main` execution driver demonstrating reference aliasing side effects versus deep copying.
+
+## Tech Stack
+- **Language**: Java 21 (LTS)
+- **Toolchain**: OpenJDK `javac` and `java`
+- **Libraries**: `java.util.Arrays` (for test diagnostic output)
+
+## Run Locally
+
+### Prerequisites
+- OpenJDK 17 or 21:
+  ```bash
+  javac -version
+  ```
+
+### Installation
+Clone the repository and enter the project directory:
+```bash
+git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
+cd java-project-roadmap/projects/04-array-toolkit
+```
+
+### Execution
+Compile the utility class and run the demonstration test suite:
+```bash
+mkdir -p bin
+javac -d bin src/ArrayToolkit.java
+java -cp bin ArrayToolkit
+```
+
+## Project Structure
+```
+04-array-toolkit/
+├── README.md
+└── src/
+    └── ArrayToolkit.java
+```
 
 ## Hints
-- `a.length` is a field, not a method.
-- For `reverse`, create `new int[a.length]` and fill it from the back.
+- Assigning `b = a` creates an alias pointing to the same array object in heap memory; modifying `b[0]` modifies `a[0]`.
+- To create a true independent copy, allocate a new array (`new int[a.length]`) and copy elements individually or via system arraycopy.
+- `reverse` should create a new array whose index `i` maps to `a[a.length - 1 - i]`.
+- Default values upon heap allocation: numeric primitives default to `0` or `0.0`, boolean arrays default to `false`, and reference types like `String[]` default to `null`.
+- In bubble sort, track a `swapped` boolean flag per pass to break early if no elements were exchanged.

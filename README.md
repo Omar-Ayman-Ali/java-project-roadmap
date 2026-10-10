@@ -1,104 +1,140 @@
-# Java Project Roadmap
+# Java Project Roadmap (Curriculum Learning Path)
 
-A learn-by-building path for Java and OOP. Each project is a spec: a goal, requirements, milestones and a "done when" checklist. You write the code, so there are no solutions here.
+**Live Demo:** Not deployed (local execution only)
 
-The order follows my CIS 201 (Object Oriented Programming) course, Ain Shams FCAI, Fall 26-27. Projects 01-07 are unlocked by lectures L01 and L02. Projects 08-14 follow the syllabus weeks that come next, so I'll build them as the course reaches those topics.
+A structured, curriculum-aligned project progression for mastering Java and Object-Oriented Programming from command-line fundamentals to architectural design patterns.
 
----
+![Language](https://img.shields.io/badge/Language-Java_21-orange?style=flat-square)
+![Curriculum](https://img.shields.io/badge/Course-Ain_Shams_FCAI_CIS_201-blue?style=flat-square)
+![Standard](https://img.shields.io/badge/Standard-Diátaxis_Blueprint-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)
 
-## The map
+## Table of Contents
+- [About](#about)
+- [Architecture](#architecture)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Run Locally](#run-locally)
+- [Project Structure](#project-structure)
+
+## About
+This repository provides a progressive, milestone-driven learning roadmap designed for second-year computer science students acquiring Java and object-oriented software engineering skills. The track strictly aligns with the CIS 201 curriculum at Ain Shams University Faculty of Computer and Artificial Intelligence (Fall 2026/2027). Each module delivers executable code, rigorous specifications, execution workflows, and targeted conceptual hints.
+
+## Architecture
+The curriculum is organized into sequential phases where each milestone unlocks advanced language mechanics and design patterns:
 
 ```mermaid
 flowchart TD
-    P1["Phase 1 · Toolchain (L01)<br/>01 Hello Toolchain"] --> P2
-    P2["Phase 2 · Control flow & arrays (L02)<br/>02 Guessing Game → 03 Menu Gradebook → 04 Array Toolkit"] --> P3
-    P3["Phase 3 · Classes & objects (L02)<br/>05 Student Registry → 06 Bank Account → 07 Library v1"] --> P4
-    P4["Phase 4 · Methods & Strings (Week 3)<br/>08 Text Analyzer"] --> P5
-    P5["Phase 5 · Inheritance & Polymorphism (Week 4)<br/>09 Shapes & Vehicles"] --> P6
-    P6["Phase 6 · Exceptions & Javadoc (Week 5)<br/>10 Safe Calculator"] --> P7
-    P7["Phase 7 · Interfaces (Week 7)<br/>11 Payment Gateway"] --> P8
-    P8["Phase 8 · Collections, Generics, Streams (Week 8)<br/>12 Task Manager"] --> P9
-    P9["Phase 9 · Design Patterns (Week 9)<br/>13 Patterns Playground"] --> P10
-    P10["Capstone<br/>14 Campus Management System"]
+    P1["Phase 1: Toolchain (L01)<br/>01 Hello Toolchain"] --> P2
+    P2["Phase 2: Control Flow and Arrays (L02)<br/>02 Guessing Game -> 03 Menu Gradebook -> 04 Array Toolkit"] --> P3
+    P3["Phase 3: Classes and Encapsulation (L02)<br/>05 Student Registry -> 06 Bank Account -> 07 Library System v1"] --> P4
+    P4["Phase 4: Methods and Strings (Week 3)<br/>08 Text Analyzer"] --> P5
+    P5["Phase 5: Inheritance and Polymorphism (Week 4)<br/>09 Shapes and Vehicles"] --> P6
+    P6["Phase 6: Exceptions and Javadoc (Week 5)<br/>10 Safe Calculator"] --> P7
+    P7["Phase 7: Interfaces and Abstraction (Week 7)<br/>11 Payment Gateway"] --> P8
+    P8["Phase 8: Collections and Generics (Week 8)<br/>12 Task Manager"] --> P9
+    P9["Phase 9: Design Patterns (Week 9)<br/>13 Patterns Playground"] --> P10
+    P10["Capstone Architecture<br/>14 Campus Management System"]
 ```
 
-## Projects
+Projects 01 through 07 are unlocked and fully implemented based on lectures L01 and L02. Projects 08 through 14 represent planned milestones aligned with subsequent syllabus topics.
 
-| # | Project | Unlocked by | Core concepts | Difficulty |
-|---|---------|-------------|---------------|-----------|
-| 01 | [Hello Toolchain](projects/01-hello-toolchain) | L01 | `javac`/`java`, `main`, `Scanner`, int division | ★☆☆☆☆ |
-| 02 | [Number Guessing Game](projects/02-number-guessing-game) | L02 | `if-else`, `while`/`do-while`, `break`/`continue` | ★☆☆☆☆ |
-| 03 | [Menu-Driven Gradebook](projects/03-menu-gradebook) | L02 | `switch`, `for`, foreach, arrays | ★★☆☆☆ |
-| 04 | [Array Toolkit](projects/04-array-toolkit) | L02 | arrays, reference semantics, `null` defaults | ★★☆☆☆ |
-| 05 | [Student Registry](projects/05-student-registry) | L02 | classes, objects, constructors, `new`, dot operator | ★★☆☆☆ |
-| 06 | [Bank Account](projects/06-bank-account) | L01 + L02 | encapsulation, access modifiers, `static`, `final` | ★★★☆☆ |
-| 07 | [Library System v1](projects/07-library-system-v1) | L02 | UML, packages, access matrix, `static` ID generator | ★★★☆☆ |
-| 08 | [Text Analyzer](projects/08-text-analyzer) | Week 3 | methods, `String` API | ★★★☆☆ |
-| 09 | [Shapes & Vehicles](projects/09-shapes-and-vehicles) | Week 4 | inheritance, overriding, overloading, `super` | ★★★☆☆ |
-| 10 | [Safe Calculator](projects/10-safe-calculator) | Week 5 | exceptions, custom exceptions, Javadoc | ★★★☆☆ |
-| 11 | [Payment Gateway](projects/11-payment-gateway) | Week 7 | interfaces, polymorphism via interfaces | ★★★★☆ |
-| 12 | [Task Manager](projects/12-task-manager) | Week 8 | `List`, generics, streams | ★★★★☆ |
-| 13 | [Patterns Playground](projects/13-patterns-playground) | Week 9 | Singleton, Factory, Observer, Strategy | ★★★★☆ |
-| 14 | [Campus Management System](projects/14-campus-management-capstone) | All | everything above, plus file persistence | ★★★★★ |
+## Features
+- **Curriculum-Gated Milestones**: Unlocks complex features incrementally to prevent knowledge gaps and scope confusion.
+- **Terminal-First Workflow**: Emphasizes direct command-line `javac` compilation and `java` launcher execution.
+- **Specification and Hint Pairings**: Provides explicit requirements alongside pedagogical guidance for every project.
+- **Reference Semantics Practice**: Exercises memory differences between stack references, heap allocations, and aliasing.
+- **Modular Package Encapsulation**: Enforces separation of concerns across domain models, service coordinates, and CLI drivers.
 
-## Progress tracker
+### Project Directory and Curriculum Status
 
-- [ ] 01 Hello Toolchain
-- [ ] 02 Number Guessing Game
-- [ ] 03 Menu-Driven Gradebook
-- [ ] 04 Array Toolkit
-- [ ] 05 Student Registry
-- [ ] 06 Bank Account
-- [ ] 07 Library System v1
-- [ ] 08 Text Analyzer
-- [ ] 09 Shapes & Vehicles
-- [ ] 10 Safe Calculator
-- [ ] 11 Payment Gateway
-- [ ] 12 Task Manager
-- [ ] 13 Patterns Playground
-- [ ] 14 Campus Management Capstone
+| Project ID | Project Title | Course Prerequisite | Core Concepts | Difficulty | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 01 | [Hello Toolchain](projects/01-hello-toolchain) | L01 | JDK toolchain, Scanner I/O, integer division | 1/5 | Implemented |
+| 02 | [Number Guessing Game](projects/02-number-guessing-game) | L02 | Branching, while, do-while, break, continue | 1/5 | Implemented |
+| 03 | [Menu Gradebook](projects/03-menu-gradebook) | L02 | switch dispatch, arrays, capacity tracking | 2/5 | Implemented |
+| 04 | [Array Toolkit](projects/04-array-toolkit) | L02 | Array references, deep copy, bubble sort | 2/5 | Implemented |
+| 05 | [Student Registry](projects/05-student-registry) | L02 | Blueprint classes, constructor overloading | 2/5 | Implemented |
+| 06 | [Bank Account](projects/06-bank-account) | L01, L02 | Encapsulation, static metrics, final fields | 3/5 | Implemented |
+| 07 | [Library System v1](projects/07-library-system-v1) | L02 | UML diagrams, multi-package architecture | 3/5 | Implemented |
+| 08 | [Text Analyzer](projects/08-text-analyzer) | Week 3 | String API immutability, static helpers | 3/5 | Upcoming |
+| 09 | [Shapes and Vehicles](projects/09-shapes-and-vehicles) | Week 4 | Inheritance, method overriding, super | 3/5 | Upcoming |
+| 10 | [Safe Calculator](projects/10-safe-calculator) | Week 5 | Exception hierarchy, custom errors | 3/5 | Upcoming |
+| 11 | [Payment Gateway](projects/11-payment-gateway) | Week 7 | Interface contracts, polymorphism | 4/5 | Upcoming |
+| 12 | [Task Manager](projects/12-task-manager) | Week 8 | Collections framework, Generics, Streams | 4/5 | Upcoming |
+| 13 | [Patterns Playground](projects/13-patterns-playground) | Week 9 | Singleton, Factory, Observer, Strategy | 4/5 | Upcoming |
+| 14 | [Campus Management Capstone](projects/14-campus-management-capstone) | Capstone | Enterprise architecture, file persistence | 5/5 | Upcoming |
 
-## How to work through a project
+## Tech Stack
+- **Language**: Java 21 (LTS)
+- **Runtime**: OpenJDK 64-Bit Server VM
+- **Build System**: Terminal `javac` CLI and Bash automation
+- **Modeling**: Unified Modeling Language (UML) via Mermaid
+- **Documentation**: Diátaxis Technical Documentation Standard
 
-1. Read the project's `README.md` and don't look at hints yet.
-2. Draw the UML class diagram on paper first (for 05 and later). L02 covers the 3-compartment box and `+ # -` visibility.
-3. Build milestone by milestone. Compile and run after every milestone, not at the end.
-4. Tick every box under **Done when**.
-5. Commit with a message that names the milestone, e.g. `05: add Student constructors`.
-6. Write 3-5 lines in the project's `NOTES.md` about what broke and what you learned.
+## Run Locally
 
-## Running Java from the terminal
+### Prerequisites
+- OpenJDK 17 or OpenJDK 21 installed and verified:
+  ```bash
+  javac -version
+  java -version
+  ```
+
+### Installation
+Clone the repository and inspect the directory structure:
+```bash
+git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
+cd java-project-roadmap
+```
+
+### Execution
+Compile and run any unlocked project module. For example, to build and run the Library System:
 
 ```bash
-# single file
-javac MyClass.java
-java MyClass
-
-# a project with packages (run from the project folder)
-mkdir -p out
-javac -d out $(find src -name "*.java")
-java -cp out com.example.Main
+cd projects/07-library-system-v1
+mkdir -p bin
+javac -d bin $(find src -name "*.java")
+java -cp bin library.app.Main
 ```
 
-Rules to remember: the file name must match the `public` class name exactly, and `main` must be `public static void main(String[] args)`.
+Alternatively, to compile and run the Bank Account management console:
 
-## Repo layout
+```bash
+cd projects/06-bank-account
+mkdir -p bin
+javac -d bin src/*.java
+java -cp bin BankApp
+```
 
+## Project Structure
 ```
 java-project-roadmap/
-├── README.md              ← this map
+├── README.md
 ├── docs/
 │   └── PROJECT_TEMPLATE.md
 └── projects/
     ├── 01-hello-toolchain/
-    │   ├── README.md      ← the spec
-    │   ├── NOTES.md       ← your reflections (create it as you go)
-    │   └── src/           ← your code goes here
-    └── ...
+    │   ├── README.md
+    │   └── src/
+    ├── 02-number-guessing-game/
+    │   ├── README.md
+    │   └── src/
+    ├── 03-menu-gradebook/
+    │   ├── README.md
+    │   └── src/
+    ├── 04-array-toolkit/
+    │   ├── README.md
+    │   └── src/
+    ├── 05-student-registry/
+    │   ├── README.md
+    │   └── src/
+    ├── 06-bank-account/
+    │   ├── README.md
+    │   └── src/
+    ├── 07-library-system-v1/
+    │   ├── README.md
+    │   ├── uml.md
+    │   └── src/
+    └── 08-text-analyzer/ ... 14-campus-management-capstone/
 ```
-
-## Resources
-
-- *Java How to Program, Early Objects*, 11th ed. (Deitel & Deitel), the course textbook
-- Oracle JDK 17 documentation
-- TutorialsPoint Java and BeginnersBook Java
