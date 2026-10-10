@@ -1,8 +1,8 @@
-# Bank Account (Encapsulation and Static State Management)
+# Bank Account (Campus NeoBank and Digital Wallet)
 
 **Live Demo:** Not deployed (local execution only)
 
-A secure banking application enforcing object encapsulation, validation guards, immutable account numbers, and institutional static metrics.
+A secure mobile digital wallet application enforcing object encapsulation, PIN security verification, transfer ceiling limits, and institutional static metrics.
 
 ![Language](https://img.shields.io/badge/Language-Java_21-orange?style=flat-square)
 ![Scope](https://img.shields.io/badge/Course-CIS_201_L01--L02-blue?style=flat-square)
@@ -18,18 +18,18 @@ A secure banking application enforcing object encapsulation, validation guards, 
 - [Hints](#hints)
 
 ## About
-This project implements an encapsulated banking system grounded in object-oriented principles from Lectures 1 and 2. It restricts direct attribute access through private fields and enforces transaction invariants during deposits, withdrawals, and account-to-account transfers. Class-level static state maintains institutional accountability by aggregating global account counts and circulating currency.
+This project implements an encapsulated digital wallet system grounded in object-oriented fundamentals from Lectures 1 and 2. It protects user balances behind private fields, enforces authentication via 4-digit security PIN verification, and imposes transaction ceilings on peer-to-peer transfers. Class-level static members maintain platform accountability by tracking global account counts and circulating institutional liquidity.
 
 ## Architecture
-State is bifurcated between per-instance heap allocations and class-level metaspace memory:
-- **Instance Variables (`balance`, `accountNumber`, `owner`)**: Unique to each instantiated account. `accountNumber` is marked `final` to ensure immutability post-instantiation.
-- **Static Class Variables (`totalAccounts`, `totalMoneyInBank`, `accountSequence`)**: Shared globally across all account instances to generate unique identifiers and monitor bank liquidity.
+Memory is partitioned between per-wallet heap allocations and class-level static metaspace data:
+- **Instance Variables (`balance`, `accountNumber`, `owner`, `pinCode`)**: Unique to each individual wallet instance. `accountNumber` is marked `final` to ensure immutability post-instantiation.
+- **Static Class Variables (`totalAccounts`, `totalMoneyInBank`, `accountSequence`)**: Shared across all instantiated wallets to produce unique account numbers and track overall money supply.
 
 ```
 +-------------------------------------------------------------------+
 | Metaspace / Class Static Area: BankAccount                        |
 |   totalAccounts: 2                                                |
-|   totalMoneyInBank: $1700.00                                      |
+|   totalMoneyInBank: $1550.00                                      |
 |   accountSequence: 1002                                           |
 +-------------------------------------------------------------------+
          ^                                           ^
@@ -38,25 +38,30 @@ State is bifurcated between per-instance heap allocations and class-level metasp
 | Heap Object: BankAccount      |           | Heap Object: BankAccount      |
 |   accountNumber: 1001 (final) |           |   accountNumber: 1002 (final) |
 |   owner: "Alice Smith"        |           |   owner: "Bob Johnson"        |
-|   balance: $500.00 (private)  |           |   balance: $1200.00 (private) |
+|   balance: $450.00 (private)  |           |   balance: $1100.00 (private) |
+|   pinCode: 1234 (private)     |           |   pinCode: 1234 (private)     |
 +-------------------------------+           +-------------------------------+
 ```
 
 ## Features
-- **Strict Data Hiding**: Prevents unauthorized balance tampering by marking financial fields `private`.
-- **Automated Identifier Generation**: Auto-increments unique integer account numbers using a static sequence tracker.
-- **Transaction Invariant Guards**: Rejects negative transfers and defends against overdraft attempts.
-- **Inter-Account Transfers**: Atomically decreases the source balance and increases the destination balance.
-- **Institutional Liquidity Auditing**: Tracks the total money managed across all active accounts via static class members.
-- **Interactive Console Menu**: Provides an operational CLI interface for account lifecycle management.
+- **Strict Data Encapsulation**: Restricts balance modification and inspection behind private access modifiers and PIN validation.
+- **Automated Sequence Generation**: Auto-increments distinct 4-digit wallet identifiers using a static counter.
+- **PIN-Protected Transactions**: Guards withdrawals, fund transfers, and balance statement lookups behind 4-digit PIN authentication.
+- **Transfer Ceiling Guard**: Enforces a `$2000.00` daily transfer ceiling to defend against fraudulent transactions.
+- **Institutional Liquidity Auditing**: Tracks the total money managed across all active wallets via static class fields.
+- **Interactive Console Menu**: Delivers an interactive terminal ATM interface for wallet management.
 
 ### What You Need To Do
-- [x] Define `BankAccount` with `private double balance`, `private final int accountNumber`, and `private String owner`.
-- [x] Configure class constants such as `public static final double MIN_OPENING_BALANCE = 100.0`.
+- [x] Define `BankAccount` with `private double balance`, `private final int accountNumber`, `private String owner`, and `private int pinCode`.
+- [x] Configure class constants such as `MIN_OPENING_BALANCE = 50.0` and `MAX_TRANSFER_LIMIT = 2000.0`.
 - [x] Implement static fields `totalAccounts`, `totalMoneyInBank`, and automatic sequence incrementation in the constructor.
-- [x] Implement transaction methods `deposit`, `withdraw`, and inter-account `transfer` with comprehensive guard validation.
+- [x] Implement transactions `deposit`, `withdraw`, and inter-wallet `transfer` with PIN authentication.
 - [x] Provide static accessors `getTotalAccounts()` and `getTotalMoneyInBank()`.
-- [x] Implement `BankApp` with a console menu allowing accounts to be opened, searched, debited, credited, and audited.
+- [x] Implement `BankApp` with an interactive console menu allowing wallets to be opened, debited, credited, and audited.
+
+### Hands-On Practice Challenges
+- Challenge 1: Add a 1% promotional cashback deposit bonus whenever a deposit amount exceeds `$500.00`.
+- Challenge 2: Implement a method `changePin(int oldPin, int newPin)` that validates the old PIN before updating to a new 4-digit passcode.
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)
@@ -72,14 +77,14 @@ State is bifurcated between per-instance heap allocations and class-level metasp
   ```
 
 ### Installation
-Clone the repository and enter the project directory:
+Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
 cd java-project-roadmap/projects/06-bank-account
 ```
 
 ### Execution
-Compile all classes into a `bin` directory and launch the interactive bank manager:
+Compile all classes into a `bin` directory and launch the banking console:
 ```bash
 mkdir -p bin
 javac -d bin src/*.java

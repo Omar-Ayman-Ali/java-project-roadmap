@@ -1,8 +1,8 @@
-# Library System v1 (Multi-Package Architecture and UML Design)
+# Library System v1 (Multi-Package Architecture and Lending Hub)
 
 **Live Demo:** Not deployed (local execution only)
 
-A modular library management system practicing UML class modeling, multi-package namespace partitioning, and visibility boundaries.
+A modular university lending hub practicing Unified Modeling Language specification, multi-package namespace partitioning, and cross-package encapsulation.
 
 ![Language](https://img.shields.io/badge/Language-Java_21-orange?style=flat-square)
 ![Scope](https://img.shields.io/badge/Course-CIS_201_L02-blue?style=flat-square)
@@ -18,13 +18,13 @@ A modular library management system practicing UML class modeling, multi-package
 - [Hints](#hints)
 
 ## About
-This project synthesizes object-oriented design and package mechanics from Lecture 2 into a cohesive multi-package system. It models domain entities and coordinating services through Unified Modeling Language (UML) specifications prior to code implementation. The system demonstrates access modifier boundaries between package-internal logic and public consumer interfaces.
+This project synthesizes object-oriented design and package mechanics from Lecture 2 into an architectural multi-package resource lending system. It visualizes class structures, visibility boundaries, and entity associations using Unified Modeling Language (UML) specifications prior to code synthesis. The system demonstrates public Application Programming Interface exposure while defending package-internal state from external corruption.
 
 ## Architecture
-The application organizes functionality into three distinct packages:
-- **`library.model`**: Contains core domain objects (`Book`, `Member`) encapsulating identity and internal states.
-- **`library.service`**: Contains the `Library` coordinator managing catalog arrays, member registries, and transaction operations.
-- **`library.app`**: Houses the console CLI entry point (`Main`), consuming services across package boundaries.
+The application organizes codebase concerns across three distinct packages:
+- **`library.model`**: Core domain entities (`Book`, `Member`) storing identities, titles, and borrow states.
+- **`library.service`**: The `Library` coordinator managing catalog arrays, member rosters, and circulation rules.
+- **`library.app`**: The `Main` console driver executing user workflows across package boundaries.
 
 ```
 library.app
@@ -38,15 +38,15 @@ library.service.Library
                              +---> borrows 0..3 library.model.Book
 ```
 
-The system architectural contract is visualized in [`uml.md`](uml.md).
+The system architectural contract is documented in [`uml.md`](uml.md).
 
 ## Features
-- **UML-First Specification**: Defines attributes, behaviors, visibility markers, and associations before code synthesis.
-- **Package Encapsulation**: Isolates data models, services, and execution interfaces across distinct namespaces.
-- **Catalog Management**: Supports book indexing, availability tracking, and duplicate ISBN detection.
-- **Member Registry**: Enforces per-member borrowing quotas (maximum 3 books) and maintains individual borrow records.
-- **Circulation Lifecycle**: Handles checkout and return transactions with state synchronization across book and member instances.
-- **Array Contiguity Compaction**: Compacts member borrow arrays upon returns to maintain dense sequential memory.
+- **UML-First Specification**: Visualizes attributes, operations, access markers, and association relationships before coding.
+- **Package Encapsulation**: Partitions domain models, service coordinates, and execution interfaces across distinct directories.
+- **Catalog Indexing**: Supports item cataloging, availability status tracking, and duplicate ISBN detection.
+- **Quota Enforced Circulation**: Enforces a strict maximum borrowing quota of 3 items per member.
+- **Array Contiguity Compaction**: Shifts array elements sequentially upon book return to eliminate empty interior null gaps.
+- **Interactive Lending Desk**: Delivers a full CLI menu for librarians to register members, add books, and process loans.
 
 ### What You Need To Do
 - [x] Author `uml.md` documenting class diagrams with three compartments, visibility notation (`+`, `-`), and relationships.
@@ -55,6 +55,10 @@ The system architectural contract is visualized in [`uml.md`](uml.md).
 - [x] Implement `Member` with member ID, name, fixed-size borrowed books array, and quota verification.
 - [x] Implement `Library` providing centralized book addition, member enrollment, checkout, and checkin routines.
 - [x] Implement `Main` providing a command-line menu interface to test cross-package integration.
+
+### Hands-On Practice Challenges
+- Challenge 1: Implement a `searchByTitle(String keyword)` method in `Library.java` that returns all catalog items containing a matching title substring.
+- Challenge 2: Add a checkout duration counter to `Book.java` that tracks how many consecutive days an item has been loaned out.
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)
@@ -70,14 +74,14 @@ The system architectural contract is visualized in [`uml.md`](uml.md).
   ```
 
 ### Installation
-Clone the repository and enter the project directory:
+Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
 cd java-project-roadmap/projects/07-library-system-v1
 ```
 
 ### Execution
-Compile all packages into a shared `bin` directory and execute the main application:
+Compile all package sources into a shared `bin` directory and launch the application:
 ```bash
 mkdir -p bin
 javac -d bin $(find src -name "*.java")

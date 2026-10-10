@@ -1,5 +1,6 @@
 public class BankAccount {
-    public static final double MIN_OPENING_BALANCE = 100.0;
+    public static final double MIN_OPENING_BALANCE = 50.0;
+    public static final double MAX_TRANSFER_LIMIT = 2000.0;
 
     private static int totalAccounts = 0;
     private static double totalMoneyInBank = 0.0;
@@ -8,8 +9,9 @@ public class BankAccount {
     private final int accountNumber;
     private String owner;
     private double balance;
+    private int pinCode;
 
-    public BankAccount(String owner, double initialDeposit) {
+    public BankAccount(String owner, double initialDeposit, int pinCode) {
         if (owner == null || owner.trim().isEmpty()) {
             throw new IllegalArgumentException("Account owner name cannot be empty.");
         }
@@ -17,11 +19,15 @@ public class BankAccount {
             throw new IllegalArgumentException(
                     "Initial deposit must be at least $" + MIN_OPENING_BALANCE + " (provided: $" + initialDeposit + ").");
         }
+        if (pinCode < 1000 || pinCode > 9999) {
+            throw new IllegalArgumentException("Security PIN must be a 4-digit number (1000-9999).");
+        }
 
         accountSequence++;
         this.accountNumber = accountSequence;
         this.owner = owner.trim();
         this.balance = initialDeposit;
+        this.pinCode = pinCode;
 
         totalAccounts++;
         totalMoneyInBank += initialDeposit;
@@ -41,60 +47,83 @@ public class BankAccount {
         }
     }
 
-    public double getBalance() {
+    public boolean verifyPin(int enteredPin) {
+        return this.pinCode == enteredPin;
+    }
+
+    public double getBalance(int enteredPin) {
+        if (!verifyPin(enteredPin)) {
+            System.out.println("Security Error: Invalid PIN. Access denied.");
+            return -1.0;
+        }
         return balance;
     }
 
     public boolean deposit(double amount) {
         if (amount <= 0.0) {
-            System.out.println("Transaction rejected: Deposit amount must be positive.");
+            System.out.println("Transaction Rejected: Deposit amount must be positive.");
             return false;
         }
         this.balance += amount;
         totalMoneyInBank += amount;
-        System.out.printf("Deposited $%.2f to Account #%d. New balance: $%.2f%n", amount, accountNumber, balance);
+        System.out.printf("Success: Deposited $%.2f into Wallet #%d. New balance: $%.2f%n",
+                amount, accountNumber, balance);
         return true;
     }
 
-    public boolean withdraw(double amount) {
+    public boolean withdraw(double amount, int enteredPin) {
+        if (!verifyPin(enteredPin)) {
+            System.out.println("Security Error: Invalid PIN. Withdrawal blocked.");
+            return false;
+        }
         if (amount <= 0.0) {
-            System.out.println("Transaction rejected: Withdrawal amount must be positive.");
+            System.out.println("Transaction Rejected: Withdrawal amount must be positive.");
             return false;
         }
         if (amount > balance) {
-            System.out.printf("Transaction rejected: Insufficient funds in Account #%d (Available: $%.2f, Requested: $%.2f)%n",
-                    accountNumber, balance, amount);
+            System.out.printf("Transaction Rejected: Insufficient balance (Available: $%.2f, Requested: $%.2f)%n",
+                    balance, amount);
             return false;
         }
+
         this.balance -= amount;
         totalMoneyInBank -= amount;
-        System.out.printf("Withdrew $%.2f from Account #%d. New balance: $%.2f%n", amount, accountNumber, balance);
+        System.out.printf("Success: Withdrew $%.2f from Wallet #%d. Remaining balance: $%.2f%n",
+                amount, accountNumber, balance);
         return true;
     }
 
-    public boolean transfer(BankAccount destination, double amount) {
+    public boolean transfer(BankAccount destination, double amount, int enteredPin) {
+        if (!verifyPin(enteredPin)) {
+            System.out.println("Security Error: Invalid PIN. Transfer blocked.");
+            return false;
+        }
         if (destination == null) {
-            System.out.println("Transfer rejected: Destination account reference is null.");
+            System.out.println("Transfer Error: Destination wallet not found.");
             return false;
         }
         if (this == destination) {
-            System.out.println("Transfer rejected: Cannot transfer funds to the same account.");
+            System.out.println("Transfer Error: Cannot transfer funds to the same wallet.");
             return false;
         }
         if (amount <= 0.0) {
-            System.out.println("Transfer rejected: Transfer amount must be positive.");
+            System.out.println("Transfer Error: Amount must be positive.");
+            return false;
+        }
+        if (amount > MAX_TRANSFER_LIMIT) {
+            System.out.printf("Transfer Error: Amount exceeds daily security ceiling ($%.2f).%n", MAX_TRANSFER_LIMIT);
             return false;
         }
         if (amount > this.balance) {
-            System.out.printf("Transfer rejected: Insufficient funds (Available: $%.2f, Requested: $%.2f)%n",
+            System.out.printf("Transfer Error: Insufficient funds (Available: $%.2f, Requested: $%.2f)%n",
                     this.balance, amount);
             return false;
         }
 
         this.balance -= amount;
         destination.balance += amount;
-        // Total money in bank remains invariant during an internal transfer
-        System.out.printf("Successfully transferred $%.2f from Account #%d to Account #%d.%n",
+        // Internal transfer maintains institutional vault equilibrium
+        System.out.printf("Success: Transferred $%.2f from Wallet #%d to Wallet #%d.%n",
                 amount, this.accountNumber, destination.accountNumber);
         return true;
     }
@@ -109,7 +138,7 @@ public class BankAccount {
 
     @Override
     public String toString() {
-        return String.format("BankAccount[#%d, Owner='%s', Balance=$%.2f]",
+        return String.format("CampusWallet[#%d, Owner='%s', Balance=$%.2f]",
                 accountNumber, owner, balance);
     }
 }

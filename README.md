@@ -18,7 +18,7 @@ A structured, curriculum-aligned project progression for mastering Java and Obje
 - [Project Structure](#project-structure)
 
 ## About
-This repository provides a progressive, milestone-driven learning roadmap designed for second-year computer science students acquiring Java and object-oriented software engineering skills. The track strictly aligns with the CIS 201 curriculum at Ain Shams University Faculty of Computer and Artificial Intelligence (Fall 2026/2027). Each module delivers executable code, rigorous specifications, execution workflows, and targeted conceptual hints.
+This repository delivers an engaging, milestone-driven learning roadmap tailored for second-year computer science students acquiring Java and object-oriented software engineering skills. The track strictly aligns with the CIS 201 curriculum at Ain Shams University Faculty of Computer and Artificial Intelligence (Fall 2026/2027). Each module provides production-grade reference implementations alongside structured hands-on practice challenges and pedagogical hints.
 
 ## Architecture
 The curriculum is organized into sequential phases where each milestone unlocks advanced language mechanics and design patterns:
@@ -40,23 +40,23 @@ flowchart TD
 Projects 01 through 07 are unlocked and fully implemented based on lectures L01 and L02. Projects 08 through 14 represent planned milestones aligned with subsequent syllabus topics.
 
 ## Features
-- **Curriculum-Gated Milestones**: Unlocks complex features incrementally to prevent knowledge gaps and scope confusion.
-- **Terminal-First Workflow**: Emphasizes direct command-line `javac` compilation and `java` launcher execution.
-- **Specification and Hint Pairings**: Provides explicit requirements alongside pedagogical guidance for every project.
-- **Reference Semantics Practice**: Exercises memory differences between stack references, heap allocations, and aliasing.
+- **Curriculum-Gated Progression**: Unlocks concepts systematically to eliminate cognitive overload and build solid foundations.
+- **Relatable Real-World Domains**: Grounds theoretical syntax in practical systems such as currency converters, vault crackers, and digital wallets.
+- **Dual Learning Model**: Supplies complete working reference code alongside structured TODO practice challenges for hands-on building.
+- **Terminal-First Workflow**: Emphasizes direct command-line `javac` compilation and `java` launcher execution without IDE reliance.
 - **Modular Package Encapsulation**: Enforces separation of concerns across domain models, service coordinates, and CLI drivers.
 
 ### Project Directory and Curriculum Status
 
-| Project ID | Project Title | Course Prerequisite | Core Concepts | Difficulty | Status |
+| Project ID | Project Title | Course Prerequisite | Real-World Concept | Difficulty | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 01 | [Hello Toolchain](projects/01-hello-toolchain) | L01 | JDK toolchain, Scanner I/O, integer division | 1/5 | Implemented |
-| 02 | [Number Guessing Game](projects/02-number-guessing-game) | L02 | Branching, while, do-while, break, continue | 1/5 | Implemented |
-| 03 | [Menu Gradebook](projects/03-menu-gradebook) | L02 | switch dispatch, arrays, capacity tracking | 2/5 | Implemented |
-| 04 | [Array Toolkit](projects/04-array-toolkit) | L02 | Array references, deep copy, bubble sort | 2/5 | Implemented |
-| 05 | [Student Registry](projects/05-student-registry) | L02 | Blueprint classes, constructor overloading | 2/5 | Implemented |
-| 06 | [Bank Account](projects/06-bank-account) | L01, L02 | Encapsulation, static metrics, final fields | 3/5 | Implemented |
-| 07 | [Library System v1](projects/07-library-system-v1) | L02 | UML diagrams, multi-package architecture | 3/5 | Implemented |
+| 01 | [Hello Toolchain](projects/01-hello-toolchain) | L01 | Student Expense & Currency Suite | 1/5 | Implemented |
+| 02 | [Number Guessing Game](projects/02-number-guessing-game) | L02 | Security Vault Cracker & Sonar | 1/5 | Implemented |
+| 03 | [Menu Gradebook](projects/03-menu-gradebook) | L02 | Academic Transcript & Honors Portal | 2/5 | Implemented |
+| 04 | [Array Toolkit](projects/04-array-toolkit) | L02 | Digital Audio & Waveform Analyzer | 2/5 | Implemented |
+| 05 | [Student Registry](projects/05-student-registry) | L02 | Collegiate Advising & Standing System | 2/5 | Implemented |
+| 06 | [Bank Account](projects/06-bank-account) | L01, L02 | NeoBank Wallet with PIN Authentication | 3/5 | Implemented |
+| 07 | [Library System v1](projects/07-library-system-v1) | L02 | Campus Media Hub & Multi-Package UML | 3/5 | Implemented |
 | 08 | [Text Analyzer](projects/08-text-analyzer) | Week 3 | String API immutability, static helpers | 3/5 | Upcoming |
 | 09 | [Shapes and Vehicles](projects/09-shapes-and-vehicles) | Week 4 | Inheritance, method overriding, super | 3/5 | Upcoming |
 | 10 | [Safe Calculator](projects/10-safe-calculator) | Week 5 | Exception hierarchy, custom errors | 3/5 | Upcoming |
@@ -89,7 +89,7 @@ cd java-project-roadmap
 ```
 
 ### Execution
-Compile and run any unlocked project module. For example, to build and run the Library System:
+Compile and run any unlocked project module. For example, to build and run the Campus Media Lending Hub:
 
 ```bash
 cd projects/07-library-system-v1
@@ -98,7 +98,7 @@ javac -d bin $(find src -name "*.java")
 java -cp bin library.app.Main
 ```
 
-Alternatively, to compile and run the Bank Account management console:
+Alternatively, to compile and run the NeoBank Digital Wallet management console:
 
 ```bash
 cd projects/06-bank-account

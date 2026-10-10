@@ -1,46 +1,72 @@
 public class Student {
-    private String name;
     private int id;
-    private float marks;
+    private String name;
+    private String major;
+    private double gpa;
+    private int creditsEarned;
 
-    // Overloaded Constructor 1: initializes name and id, default marks to 0.0f
+    // Overloaded Constructor 1: Common default initialization
     public Student(String name, int id) {
-        this(name, id, 0.0f);
+        this(name, id, "Computer Science & AI", 0.0, 0);
     }
 
-    // Overloaded Constructor 2: full parameter initialization
-    public Student(String name, int id, float marks) {
-        this.name = name;
+    // Overloaded Constructor 2: Full parameter initialization
+    public Student(String name, int id, String major, double gpa, int creditsEarned) {
+        this.name = (name != null && !name.trim().isEmpty()) ? name.trim() : "Unknown Student";
         this.id = id;
-        this.marks = Math.max(0.0f, marks);
-    }
-
-    public String getName() {
-        return name;
+        this.major = (major != null && !major.trim().isEmpty()) ? major.trim() : "Undeclared";
+        this.gpa = Math.max(0.0, Math.min(4.0, gpa)); // bounded between 0.0 and 4.0
+        this.creditsEarned = Math.max(0, creditsEarned);
     }
 
     public int getId() {
         return id;
     }
 
-    public float getMarks() {
-        return marks;
+    public String getName() {
+        return name;
     }
 
-    public float addMarks(float additionalMarks) {
-        if (additionalMarks > 0.0f) {
-            this.marks += additionalMarks;
+    public String getMajor() {
+        return major;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public int getCreditsEarned() {
+        return creditsEarned;
+    }
+
+    public void updateGpa(double newGpa) {
+        this.gpa = Math.max(0.0, Math.min(4.0, newGpa));
+    }
+
+    public void addCredits(int additionalCredits) {
+        if (additionalCredits > 0) {
+            this.creditsEarned += additionalCredits;
         }
-        return this.marks;
     }
 
-    public boolean isPassing() {
-        return this.marks >= 50.0f;
+    // Evaluates academic standing based on collegiate GPA standards
+    public String getAcademicStanding() {
+        if (gpa >= 3.5) {
+            return "Dean's List (Honors)";
+        } else if (gpa >= 2.0) {
+            return "Good Standing";
+        } else {
+            return "Academic Probation";
+        }
+    }
+
+    public boolean isGraduationEligible() {
+        return creditsEarned >= 120 && gpa >= 2.0;
     }
 
     @Override
     public String toString() {
-        return String.format("Student[ID=%d, Name='%s', Marks=%.2f, Status=%s]",
-                id, name, marks, isPassing() ? "PASS" : "FAIL");
+        return String.format("Student[ID=%d, Name='%-15s', Major='%-22s', GPA=%.2f, Credits=%3d, Standing='%s']",
+                id, name, major, gpa, creditsEarned, getAcademicStanding());
     }
 }

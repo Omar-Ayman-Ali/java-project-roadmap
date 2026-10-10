@@ -1,139 +1,195 @@
 import java.util.Scanner;
 
 public class Gradebook {
-    private static final int MAX_CAPACITY = 30;
+    private static final int MAX_COURSES = 30;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        double[] marks = new double[MAX_CAPACITY];
+        double[] grades = new double[MAX_COURSES];
+        String[] courseNames = new String[MAX_COURSES];
         int count = 0;
         boolean running = true;
 
-        System.out.println("=========================================");
-        System.out.println("       Menu-Driven Gradebook (L02)       ");
-        System.out.println("=========================================");
+        System.out.println("=================================================");
+        System.out.println("      Student Academic Transcript & Portal       ");
+        System.out.println("=================================================");
+        System.out.println("Welcome to the Semester Gradebook & Honors Portal.");
+
+        // Pre-populate with two sample courses for instant exploration
+        courseNames[count] = "Introduction to Programming";
+        grades[count] = 92.5;
+        count++;
+
+        courseNames[count] = "Discrete Mathematics";
+        grades[count] = 78.0;
+        count++;
 
         while (running) {
-            System.out.println("\n--- Main Menu ---");
-            System.out.println("1. Add Student Mark");
-            System.out.println("2. List All Marks");
-            System.out.println("3. Display Statistics (Average, Min, Max)");
-            System.out.println("4. Display Letter Grades");
-            System.out.println("0. Exit Application");
-            System.out.print("Select an option (0-4): ");
+            System.out.println("\n--- Portal Navigation Menu ---");
+            System.out.println("1. Add Course Grade");
+            System.out.println("2. Display Academic Transcript");
+            System.out.println("3. Compute Performance Statistics (Average, Min, Max)");
+            System.out.println("4. Generate Letter Grades & Honors Standing");
+            System.out.println("5. Filter Passing Courses Only (Score >= 50.0)");
+            System.out.println("0. Exit Portal");
+            System.out.print("Please choose an option (0-5): ");
 
             if (!scanner.hasNextInt()) {
-                System.out.println("Invalid choice. Please input an integer option.");
+                System.out.println("Invalid input. Please enter a menu number.");
                 scanner.next();
                 continue;
             }
 
             int choice = scanner.nextInt();
+            scanner.nextLine(); // clear newline token
 
             switch (choice) {
                 case 1:
-                    if (count >= MAX_CAPACITY) {
-                        System.out.println("Capacity reached. Cannot store more than " + MAX_CAPACITY + " marks.");
+                    if (count >= MAX_COURSES) {
+                        System.out.println("Capacity full! You cannot record more than " + MAX_COURSES + " courses.");
+                        break;
+                    }
+                    System.out.print("Enter course name (e.g. Object Oriented Programming): ");
+                    String name = scanner.nextLine().trim();
+                    if (name.isEmpty()) {
+                        name = "Course #" + (count + 1);
+                    }
+
+                    System.out.print("Enter final numerical score (0.0 to 100.0): ");
+                    if (!scanner.hasNextDouble()) {
+                        System.out.println("Invalid score. Must be a numeric value.");
+                        scanner.next();
+                        break;
+                    }
+                    double score = scanner.nextDouble();
+
+                    if (score < 0.0 || score > 100.0) {
+                        System.out.println("Validation Error: Score must be between 0.0 and 100.0.");
                     } else {
-                        System.out.print("Enter mark (0.0 to 100.0): ");
-                        if (!scanner.hasNextDouble()) {
-                            System.out.println("Invalid numeric value.");
-                            scanner.next();
-                            break;
-                        }
-                        double mark = scanner.nextDouble();
-                        if (mark < 0.0 || mark > 100.0) {
-                            System.out.println("Validation error: Mark must be between 0.0 and 100.0.");
-                        } else {
-                            marks[count] = mark;
-                            count++;
-                            System.out.println("Mark recorded successfully. Total marks stored: " + count);
-                        }
+                        courseNames[count] = name;
+                        grades[count] = score;
+                        count++;
+                        System.out.println("Course added successfully! Total courses enrolled: " + count);
                     }
                     break;
 
                 case 2:
                     if (count == 0) {
-                        System.out.println("No marks recorded yet.");
+                        System.out.println("No course grades on record yet.");
                     } else {
-                        System.out.println("\n--- Recorded Marks (" + count + "/" + MAX_CAPACITY + ") ---");
-                        // Indexed for loop when index numbering is needed for reporting
+                        System.out.println("\n--- Academic Transcript (" + count + "/" + MAX_COURSES + ") ---");
+                        // Indexed for loop when index numbering is needed
                         for (int i = 0; i < count; i++) {
-                            System.out.printf("Student #%02d: %6.2f%n", (i + 1), marks[i]);
+                            System.out.printf("[%02d] %-32s : %6.2f%n", (i + 1), courseNames[i], grades[i]);
                         }
                     }
                     break;
 
                 case 3:
                     if (count == 0) {
-                        System.out.println("Cannot calculate statistics: Gradebook is empty.");
+                        System.out.println("Cannot calculate statistics: Transcript is empty.");
                     } else {
                         double sum = 0.0;
-                        double highest = marks[0];
-                        double lowest = marks[0];
+                        double highest = grades[0];
+                        double lowest = grades[0];
+                        int passingCount = 0;
 
-                        // Foreach loop over recorded slice (copying active slice to showcase foreach)
-                        double[] activeMarks = new double[count];
+                        // Create an active slice array to demonstrate the enhanced for loop (foreach)
+                        double[] activeGrades = new double[count];
                         for (int i = 0; i < count; i++) {
-                            activeMarks[i] = marks[i];
+                            activeGrades[i] = grades[i];
                         }
 
-                        for (double m : activeMarks) {
-                            sum += m;
-                            if (m > highest) {
-                                highest = m;
+                        for (double g : activeGrades) {
+                            sum += g;
+                            if (g > highest) {
+                                highest = g;
                             }
-                            if (m < lowest) {
-                                lowest = m;
+                            if (g < lowest) {
+                                lowest = g;
+                            }
+                            if (g >= 50.0) {
+                                passingCount++;
                             }
                         }
 
                         double average = sum / count;
+                        double passRate = ((double) passingCount / count) * 100.0;
 
-                        System.out.println("\n--- Gradebook Statistics ---");
-                        System.out.println("Total Recorded Marks: " + count);
-                        System.out.printf("Class Average: %6.2f%n", average);
-                        System.out.printf("Highest Mark : %6.2f%n", highest);
-                        System.out.printf("Lowest Mark  : %6.2f%n", lowest);
+                        System.out.println("\n--- Academic Performance Summary ---");
+                        System.out.println("Total Courses Evaluated : " + count);
+                        System.out.printf("Cumulative Average      : %6.2f%n", average);
+                        System.out.printf("Highest Scoring Grade   : %6.2f%n", highest);
+                        System.out.printf("Lowest Scoring Grade    : %6.2f%n", lowest);
+                        System.out.printf("Passing Success Rate    : %6.1f%% (%d/%d courses)%n", passRate, passingCount, count);
                     }
                     break;
 
                 case 4:
                     if (count == 0) {
-                        System.out.println("No marks available to grade.");
+                        System.out.println("No courses on record to classify.");
                     } else {
-                        System.out.println("\n--- Letter Grade Conversion ---");
-                        // Chained if-else if for continuous numeric ranges
+                        System.out.println("\n--- Letter Grades & Academic Standing ---");
+                        // Chained if-else if structure for score ranges
                         for (int i = 0; i < count; i++) {
-                            double m = marks[i];
-                            char letterGrade;
+                            double g = grades[i];
+                            char letter;
+                            String standing;
 
-                            if (m >= 90.0) {
-                                letterGrade = 'A';
-                            } else if (m >= 80.0) {
-                                letterGrade = 'B';
-                            } else if (m >= 70.0) {
-                                letterGrade = 'C';
-                            } else if (m >= 60.0) {
-                                letterGrade = 'D';
+                            if (g >= 90.0) {
+                                letter = 'A';
+                                standing = "Excellent / High Honors";
+                            } else if (g >= 80.0) {
+                                letter = 'B';
+                                standing = "Very Good / Honors";
+                            } else if (g >= 70.0) {
+                                letter = 'C';
+                                standing = "Good Standing";
+                            } else if (g >= 60.0) {
+                                letter = 'D';
+                                standing = "Satisfactory Pass";
                             } else {
-                                letterGrade = 'F';
+                                letter = 'F';
+                                standing = "Academic Review Needed";
                             }
 
-                            System.out.printf("Student #%02d: %6.2f -> Grade %c%n", (i + 1), m, letterGrade);
+                            System.out.printf("[%02d] %-28s : %6.2f -> [%c] (%s)%n",
+                                    (i + 1), courseNames[i], g, letter, standing);
                         }
                     }
                     break;
 
+                case 5:
+                    if (count == 0) {
+                        System.out.println("No courses on record to filter.");
+                    } else {
+                        System.out.println("\n--- Passed Courses Filter (Score >= 50.0) ---");
+                        int passedCount = 0;
+                        for (int i = 0; i < count; i++) {
+                            if (grades[i] >= 50.0) {
+                                System.out.printf("PASS: %-32s (%6.2f)%n", courseNames[i], grades[i]);
+                                passedCount++;
+                            }
+                        }
+                        System.out.println("Total passed courses: " + passedCount + " out of " + count);
+                    }
+                    break;
+
                 case 0:
-                    System.out.println("Exiting Gradebook system. Goodbye.");
+                    System.out.println("Thank you for using the Academic Portal. Have a great semester!");
                     running = false;
                     break;
 
                 default:
-                    System.out.println("Unrecognized menu option. Please select 0 through 4.");
+                    System.out.println("Option out of range. Please choose between 0 and 5.");
                     break;
             }
+
+            // ==============================================================
+            // TODO: Practice Challenge For You
+            // 1. Add credit hours support (e.g. 3 credits per course).
+            // 2. Compute a real 4.0 GPA: A=4.0, B=3.0, C=2.0, D=1.0, F=0.0.
+            // ==============================================================
         }
 
         scanner.close();

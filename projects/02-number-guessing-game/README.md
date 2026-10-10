@@ -1,8 +1,8 @@
-# Number Guessing Game (Console Loop Flow)
+# Number Guessing Game (Vault Cracker and Proximity Sonar)
 
 **Live Demo:** Not deployed (local execution only)
 
-An interactive terminal guessing game practicing conditional branching, bounded loops, and loop control statements.
+An engaging command-line security vault breaker practicing nested loop control, input validation guards, and proximity feedback calculations.
 
 ![Language](https://img.shields.io/badge/Language-Java_21-orange?style=flat-square)
 ![Scope](https://img.shields.io/badge/Course-CIS_201_L02-blue?style=flat-square)
@@ -18,51 +18,57 @@ An interactive terminal guessing game practicing conditional branching, bounded 
 - [Hints](#hints)
 
 ## About
-This project implements a console game designed to reinforce Java control structures introduced in Lecture 2. The program coordinates pre-test loop evaluation, post-test replay loops, and guarded branching logic. It demonstrates clean user input handling without premature loop termination or state corruption.
+This project reinforces control flow principles from Lecture 2 by simulating an interactive digital security vault breach. Players assume the role of a cybersecurity technician attempting to identify a randomly generated passcode using dual-axis feedback (numerical direction and distance proximity). The implementation demonstrates loop lifecycles, guarded branching, and resilient input recovery without game crashes.
 
 ## Architecture
-The application executes within a two-tier nested loop structure:
-- **Outer Loop (`do-while`)**: Controls session replay state, guaranteeing at least one full game round before evaluating termination criteria.
-- **Inner Loop (`while`)**: Governs attempt countdown and guess evaluation against the generated target.
+The application runs inside a two-tier nested loop structure:
+- **Outer Session Loop (`do-while`)**: Governs overall game rounds, guaranteeing at least one full play session and handling replay confirmation.
+- **Inner Mission Loop (`while`)**: Governs shield countdown (7 attempts) and handles guess verification.
 
 ```
-+-------------------------------------------------------+
-| Outer Loop: do-while (Session Lifecycle)              |
-|                                                       |
-|  [ Generate Target: 1..100 ]                          |
-|  [ Initialize Attempts = 7 ]                          |
-|                                                       |
-|  +-------------------------------------------------+  |
-|  | Inner Loop: while (Attempts Remaining > 0)      |  |
-|  |                                                 |  |
-|  |   [ Read Input ]                                |  |
-|  |     |-- Invalid / Out-of-bounds -> continue     |  |
-|  |     |-- Equals Target           -> break (Win)  |  |
-|  |     |-- Greater / Smaller       -> Feedback     |  |
-|  +-------------------------------------------------+  |
-|                                                       |
-|  [ Prompt Play Again (y/n) ]                          |
-+-------------------------------------------------------+
++-------------------------------------------------------------+
+| Outer Session Loop: do-while                                |
+|                                                             |
+|   1. Generate Secret Passcode: [1..100]                     |
+|   2. Initialize Shield Units: 7                             |
+|                                                             |
+|   +-----------------------------------------------------+   |
+|   | Inner Mission Loop: while (Shields > 0)             |   |
+|   |                                                     |   |
+|   |   Input Stream -> Token Inspection                  |   |
+|   |     |-- Non-integer token      -> continue          |   |
+|   |     |-- Out-of-bounds (1..100) -> continue          |   |
+|   |     |-- Exact Match            -> break (Win)       |   |
+|   |     |-- High / Low Distance    -> Feedback Dispatch |   |
+|   +-----------------------------------------------------+   |
+|                                                             |
+|   Prompt Replay Mission (y/n)                               |
++-------------------------------------------------------------+
 ```
 
 ## Features
-- **Pseudorandom Target Generation**: Produces uniform random integers within the closed interval [1, 100].
-- **Bounded Guess Allocation**: Restricts the player to a strict maximum of 7 guessing attempts per round.
-- **Feedback Dispatch**: Emits relative distance indicators ("Too high" or "Too low") after each valid attempt.
-- **Input Sanitization**: Skips invalid tokens and out-of-range integers via `continue` without depleting player attempts.
-- **Session Continuity**: Leverages post-test `do-while` validation to prompt and execute optional game replays.
+- **Target Passcode Generation**: Uses `java.util.Random` to produce a discrete pseudorandom integer between 1 and 100.
+- **Shield Allocation Defense**: Enforces a strict 7-attempt limit per mission before triggering an alarm lockdown.
+- **Dual-Axis Signal Feedback**: Emits directional cues ("Too HIGH" / "Too LOW") alongside absolute proximity alerts ("BOILING HOT", "WARM", "COLD").
+- **Fault-Tolerant Input Stream**: Employs `continue` to intercept invalid characters and out-of-range inputs without penalizing attempt shields.
+- **Replay Continuity**: Leverages a post-test `do-while` loop to cleanly restart or exit game sessions.
 
 ### What You Need To Do
-- [x] Configure `java.util.Random` to generate a random integer between 1 and 100.
-- [x] Maintain a countdown counter starting at 7 remaining attempts.
-- [x] Provide real-time directional feedback ("Too high", "Too low", or "Correct") on every valid guess.
-- [x] Employ `continue` to filter out non-numeric tokens and values outside the 1 to 100 range without penalizing the player.
-- [x] Use a `do-while` structure to query whether the player wishes to restart after round completion.
+- [x] Configure pseudorandom passcode generation in the closed range [1, 100].
+- [x] Initialize a shield counter to 7 units and decrement upon valid attempts.
+- [x] Use `Math.abs(guess - secretCode)` to compute proximity distance and output helpful feedback.
+- [x] Use `continue` when input is invalid or out-of-bounds to keep shields intact.
+- [x] Use `break` to exit the mission loop immediately once the code is cracked.
+- [x] Implement a `do-while` loop to prompt the player for session replays.
+
+### Hands-On Practice Challenges
+- Challenge 1: Add a mission difficulty selector before the game starts (Rookie: 1 to 50 with 10 shields; Agent: 1 to 100 with 7 shields; Specialist: 1 to 200 with 5 shields).
+- Challenge 2: Implement a high score tracker that stores the lowest number of attempts used across multiple rounds within the same session.
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)
 - **Toolchain**: OpenJDK `javac` and `java`
-- **Libraries**: `java.util.Random`, `java.util.Scanner`
+- **Libraries**: `java.util.Random`, `java.util.Scanner`, `java.lang.Math`
 
 ## Run Locally
 
@@ -73,14 +79,14 @@ The application executes within a two-tier nested loop structure:
   ```
 
 ### Installation
-Clone the repository and enter the project directory:
+Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
 cd java-project-roadmap/projects/02-number-guessing-game
 ```
 
 ### Execution
-Compile the source file into a `bin` directory and launch the game:
+Compile the game and launch the vault cracking simulation:
 ```bash
 mkdir -p bin
 javac -d bin src/NumberGuessingGame.java
@@ -96,8 +102,8 @@ java -cp bin NumberGuessingGame
 ```
 
 ## Hints
-- `Random.nextInt(100)` returns values from 0 to 99, so append 1 (`random.nextInt(100) + 1`) to shift the interval to 1 through 100.
-- Use `scanner.hasNextInt()` prior to invoking `scanner.nextInt()` to prevent `InputMismatchException` crashes when non-numeric input is supplied.
-- Remember that `do-while` statements evaluate the condition at the end of the block and require a terminating semicolon: `do { ... } while (condition);`.
-- `continue` skips the remaining statements in the current loop iteration and proceeds immediately to the next loop evaluation.
-- `break` exits the nearest enclosing loop immediately.
+- `Random.nextInt(100)` produces values from 0 through 99. Add 1 (`random.nextInt(100) + 1`) to shift the interval to 1 through 100.
+- Check `scanner.hasNextInt()` before calling `scanner.nextInt()` to prevent runtime `InputMismatchException` crashes when letters are typed.
+- Remember that `continue` skips the remainder of the current loop iteration and immediately restarts loop condition testing.
+- The `Math.abs(a - b)` method computes the absolute difference between two numbers regardless of which is larger.
+- A `do-while` loop always executes at least once before testing its terminating condition, making it ideal for interactive game replays.

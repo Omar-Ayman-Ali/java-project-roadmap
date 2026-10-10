@@ -122,6 +122,12 @@ public class Main {
                     System.out.println("Unrecognized choice.");
                     break;
             }
+
+            // ==============================================================
+            // TODO: Practice Challenge For You
+            // 1. Add searchByTitle(String keyword) to find books by partial title match.
+            // 2. Add a loan duration tracker: mark books with a checkout date or day counter.
+            // ==============================================================
         }
 
         scanner.close();
