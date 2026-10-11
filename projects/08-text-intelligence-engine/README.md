@@ -1,6 +1,6 @@
-# 08 · Text Analyzer
+# Text Intelligence Engine (String Immutability and Methods)
 
-**Unlocked by:** Week 3 (Methods, Strings) · **Difficulty:** ★★★☆☆ · **Time:** ~4 hours
+**Unlocked by:** Week 3 (Methods, Strings) · **Difficulty:** 3/5 · **Time:** ~4 hours
 
 ## Goal
 Analyse a block of text typed or pasted by the user: word counts, palindromes, character frequencies. Heavy practice with methods and the `String` API.

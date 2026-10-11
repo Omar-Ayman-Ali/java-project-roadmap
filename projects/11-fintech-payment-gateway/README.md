@@ -1,6 +1,6 @@
-# 11 · Payment Gateway
+# Fintech Payment Gateway (Interfaces and Polymorphic Contracts)
 
-**Unlocked by:** Week 7 (Interfaces) · **Difficulty:** ★★★★☆ · **Time:** ~5-6 hours
+**Unlocked by:** Week 7 (Interfaces) · **Difficulty:** 4/5 · **Time:** ~5-6 hours
 
 ## Goal
 A checkout system that accepts any payment method through one interface, so adding a new method never requires changing the checkout code.

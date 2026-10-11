@@ -1,4 +1,4 @@
-# Bank Account (Campus NeoBank and Digital Wallet)
+# NeoBank Digital Wallet (Access Control and Static State)
 
 **Live Demo:** Not deployed (local execution only)
 
@@ -52,8 +52,8 @@ Memory is partitioned between per-wallet heap allocations and class-level static
 - **Institutional Liquidity Auditing**: Tracks the total money managed across all active wallets via static class fields.
 - **Interactive Console Menu**: Delivers an interactive terminal ATM interface for wallet management.
 
-### Project Assignment: Make Project Bank Account
-Make a project called `Campus NeoBank and Digital Wallet` that models a secure financial account system with strict encapsulation, PIN validation, and shared institutional metrics.
+### Project Assignment: Make Project NeoBank Digital Wallet
+Make a project called `NeoBank Digital Wallet` that models a secure financial account system with strict encapsulation, PIN validation, and shared institutional metrics.
 
 Specifically, you need to build:
 1. `BankAccount.java`: The core wallet account entity class.
@@ -124,7 +124,7 @@ During an internal fund transfer between Alice and Bob:
 Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
-cd java-project-roadmap/projects/06-bank-account
+cd java-project-roadmap/projects/06-neobank-digital-wallet
 ```
 
 ### Execution
@@ -137,7 +137,7 @@ java -cp bin BankApp
 
 ## Project Structure
 ```
-06-bank-account/
+06-neobank-digital-wallet/
 ├── README.md
 └── src/
     ├── BankAccount.java

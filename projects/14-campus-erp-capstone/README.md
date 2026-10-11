@@ -1,6 +1,6 @@
-# 14 · Campus Management System (Capstone)
+# Campus ERP Management System (Enterprise Architecture Capstone)
 
-**Unlocked by:** everything above · **Difficulty:** ★★★★★ · **Time:** 15-25 hours
+**Unlocked by:** Everything above · **Difficulty:** 5/5 · **Time:** 15-25 hours
 
 ## Goal
 A console application for a university: students, professors, courses and enrolment. It's the Course/Professor domain model from the L02 UML exercise, grown into a real program that uses every concept in this roadmap.

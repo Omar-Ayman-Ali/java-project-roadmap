@@ -1,4 +1,4 @@
-# Hello Toolchain (Student Utility and Expense Suite)
+# Student Expense and Currency Suite (Toolchain and Syntax)
 
 **Live Demo:** Not deployed (local execution only)
 
@@ -37,8 +37,8 @@ User inputs stream synchronously from the keyboard via `System.in`, get parsed i
 - **Group Dining Bill Splitter**: Calculates custom tip allocations, grand totals, and fair per-person contributions.
 - **Floating-Point Precision Evaluator**: Contrasts integer division truncation against explicit type promotion (`(double) sum / 3.0`).
 
-### Project Assignment: Make Project Hello Toolchain
-Make a project called `Student Utility and Expense Suite` that demonstrates how to write, compile, and execute Java programs directly from the terminal without relying on an IDE.
+### Project Assignment: Make Project Student Expense and Currency Suite
+Make a project called `Student Expense and Currency Suite` that demonstrates how to write, compile, and execute Java programs directly from the terminal without relying on an IDE.
 
 Specifically, you need to build:
 1. `HelloWorld.java`: A diagnostic program that queries the Java runtime environment (`System.getProperty`) and prints the operating system name, JDK version, and maximum heap memory.
@@ -99,7 +99,7 @@ Floating-point numbers can accumulate minor precision anomalies. When displaying
 Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
-cd java-project-roadmap/projects/01-hello-toolchain
+cd java-project-roadmap/projects/01-campus-utility-toolkit
 ```
 
 ### Execution
@@ -124,7 +124,7 @@ java -cp bin ScoreCalculator
 
 ## Project Structure
 ```
-01-hello-toolchain/
+01-campus-utility-toolkit/
 ├── README.md
 └── src/
     ├── CurrencyConverter.java

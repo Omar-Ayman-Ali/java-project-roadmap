@@ -1,4 +1,4 @@
-# Student Registry (Academic Advising and Standing System)
+# Collegiate Advising System (Encapsulation and Constructors)
 
 **Live Demo:** Not deployed (local execution only)
 
@@ -52,8 +52,8 @@ The system consists of two collaborating classes:
 - **Highest GPA Discovery**: Identifies the valedictorian across registered cohort members.
 - **Sparse Array Null-Safety**: Demonstrates defensive reference checking to prevent runtime `NullPointerException` failures.
 
-### Project Assignment: Make Project Student Registry
-Make a project called `Collegiate Academic Advising Registry` that models student entities and manages them in a registry coordinator while practicing class blueprints, constructor overloading, and object array null-safety.
+### Project Assignment: Make Project Collegiate Advising System
+Make a project called `Collegiate Advising System` that models student entities and manages them in a registry coordinator while practicing class blueprints, constructor overloading, and object array null-safety.
 
 Specifically, you need to build:
 1. `Student.java`: An entity class modeling student academic state.
@@ -124,7 +124,7 @@ Allocating an object array like `new Student[6]` allocates space for 6 reference
 Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
-cd java-project-roadmap/projects/05-student-registry
+cd java-project-roadmap/projects/05-collegiate-advising-system
 ```
 
 ### Execution
@@ -137,7 +137,7 @@ java -cp bin StudentRegistry
 
 ## Project Structure
 ```
-05-student-registry/
+05-collegiate-advising-system/
 ├── README.md
 └── src/
     ├── Student.java

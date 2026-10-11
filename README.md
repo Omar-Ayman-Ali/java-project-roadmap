@@ -25,16 +25,16 @@ The curriculum is organized into sequential phases where each milestone unlocks 
 
 ```mermaid
 flowchart TD
-    P1["Phase 1: Toolchain (L01)<br/>01 Hello Toolchain"] --> P2
-    P2["Phase 2: Control Flow and Arrays (L02)<br/>02 Guessing Game -> 03 Menu Gradebook -> 04 Array Toolkit"] --> P3
-    P3["Phase 3: Classes and Encapsulation (L02)<br/>05 Student Registry -> 06 Bank Account -> 07 Library System v1"] --> P4
-    P4["Phase 4: Methods and Strings (Week 3)<br/>08 Text Analyzer"] --> P5
-    P5["Phase 5: Inheritance and Polymorphism (Week 4)<br/>09 Shapes and Vehicles"] --> P6
-    P6["Phase 6: Exceptions and Javadoc (Week 5)<br/>10 Safe Calculator"] --> P7
-    P7["Phase 7: Interfaces and Abstraction (Week 7)<br/>11 Payment Gateway"] --> P8
-    P8["Phase 8: Collections and Generics (Week 8)<br/>12 Task Manager"] --> P9
-    P9["Phase 9: Design Patterns (Week 9)<br/>13 Patterns Playground"] --> P10
-    P10["Capstone Architecture<br/>14 Campus Management System"]
+    P1["Phase 1: Toolchain (L01)<br/>01 Campus Utility Toolkit"] --> P2
+    P2["Phase 2: Control Flow and Arrays (L02)<br/>02 Security Vault Cracker -> 03 Academic Transcript Portal -> 04 Audio Waveform Analyzer"] --> P3
+    P3["Phase 3: Classes and Encapsulation (L02)<br/>05 Collegiate Advising System -> 06 NeoBank Digital Wallet -> 07 Campus Lending Hub"] --> P4
+    P4["Phase 4: Methods and Strings (Week 3)<br/>08 Text Intelligence Engine"] --> P5
+    P5["Phase 5: Inheritance and Polymorphism (Week 4)<br/>09 Logistics Fleet Engine"] --> P6
+    P6["Phase 6: Exceptions and Javadoc (Week 5)<br/>10 Resilient Financial Calculator"] --> P7
+    P7["Phase 7: Interfaces and Abstraction (Week 7)<br/>11 Fintech Payment Gateway"] --> P8
+    P8["Phase 8: Collections and Generics (Week 8)<br/>12 Enterprise Workflow Queue"] --> P9
+    P9["Phase 9: Design Patterns (Week 9)<br/>13 System Architecture Patterns"] --> P10
+    P10["Capstone Architecture<br/>14 Campus ERP Capstone"]
 ```
 
 Projects 01 through 07 are unlocked and fully implemented based on lectures L01 and L02. Projects 08 through 14 represent planned milestones aligned with subsequent syllabus topics.
@@ -50,20 +50,20 @@ Projects 01 through 07 are unlocked and fully implemented based on lectures L01 
 
 | Project ID | Project Title | Course Prerequisite | Real-World Concept | Difficulty | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 01 | [Hello Toolchain](projects/01-hello-toolchain) | L01 | Student Expense & Currency Suite | 1/5 | Implemented |
-| 02 | [Number Guessing Game](projects/02-number-guessing-game) | L02 | Security Vault Cracker & Sonar | 1/5 | Implemented |
-| 03 | [Menu Gradebook](projects/03-menu-gradebook) | L02 | Academic Transcript & Honors Portal | 2/5 | Implemented |
-| 04 | [Array Toolkit](projects/04-array-toolkit) | L02 | Digital Audio & Waveform Analyzer | 2/5 | Implemented |
-| 05 | [Student Registry](projects/05-student-registry) | L02 | Collegiate Advising & Standing System | 2/5 | Implemented |
-| 06 | [Bank Account](projects/06-bank-account) | L01, L02 | NeoBank Wallet with PIN Authentication | 3/5 | Implemented |
-| 07 | [Library System v1](projects/07-library-system-v1) | L02 | Campus Media Hub & Multi-Package UML | 3/5 | Implemented |
-| 08 | [Text Analyzer](projects/08-text-analyzer) | Week 3 | String API immutability, static helpers | 3/5 | Upcoming |
-| 09 | [Shapes and Vehicles](projects/09-shapes-and-vehicles) | Week 4 | Inheritance, method overriding, super | 3/5 | Upcoming |
-| 10 | [Safe Calculator](projects/10-safe-calculator) | Week 5 | Exception hierarchy, custom errors | 3/5 | Upcoming |
-| 11 | [Payment Gateway](projects/11-payment-gateway) | Week 7 | Interface contracts, polymorphism | 4/5 | Upcoming |
-| 12 | [Task Manager](projects/12-task-manager) | Week 8 | Collections framework, Generics, Streams | 4/5 | Upcoming |
-| 13 | [Patterns Playground](projects/13-patterns-playground) | Week 9 | Singleton, Factory, Observer, Strategy | 4/5 | Upcoming |
-| 14 | [Campus Management Capstone](projects/14-campus-management-capstone) | Capstone | Enterprise architecture, file persistence | 5/5 | Upcoming |
+| 01 | [Student Expense and Currency Suite](projects/01-campus-utility-toolkit) | L01 | Multi-Utility Financial and Grade Suite | 1/5 | Implemented |
+| 02 | [Cyber Vault Security Cracker](projects/02-security-vault-cracker) | L02 | Security Vault Intrusion and Sonar | 1/5 | Implemented |
+| 03 | [Academic Transcript Portal](projects/03-academic-transcript-portal) | L02 | Transcript Records and Honors Portal | 2/5 | Implemented |
+| 04 | [Audio Waveform Analyzer](projects/04-audio-waveform-analyzer) | L02 | Digital Audio and Waveform Processing | 2/5 | Implemented |
+| 05 | [Collegiate Advising System](projects/05-collegiate-advising-system) | L02 | Advising Registry and Academic Standing | 2/5 | Implemented |
+| 06 | [NeoBank Digital Wallet](projects/06-neobank-digital-wallet) | L01, L02 | Digital Wallet with PIN Authentication | 3/5 | Implemented |
+| 07 | [Campus Lending Hub](projects/07-campus-lending-hub) | L02 | Media Lending Hub and Multi-Package UML | 3/5 | Implemented |
+| 08 | [Text Intelligence Engine](projects/08-text-intelligence-engine) | Week 3 | String API immutability, static helpers | 3/5 | Upcoming |
+| 09 | [Logistics Fleet Engine](projects/09-logistics-fleet-engine) | Week 4 | Inheritance, method overriding, super | 3/5 | Upcoming |
+| 10 | [Resilient Financial Calculator](projects/10-resilient-financial-calculator) | Week 5 | Exception hierarchy, custom errors | 3/5 | Upcoming |
+| 11 | [Fintech Payment Gateway](projects/11-fintech-payment-gateway) | Week 7 | Interface contracts, polymorphism | 4/5 | Upcoming |
+| 12 | [Enterprise Workflow Queue](projects/12-enterprise-workflow-queue) | Week 8 | Collections framework, Generics, Streams | 4/5 | Upcoming |
+| 13 | [System Architecture Patterns](projects/13-system-architecture-patterns) | Week 9 | Singleton, Factory, Observer, Strategy | 4/5 | Upcoming |
+| 14 | [Campus ERP Capstone](projects/14-campus-erp-capstone) | Capstone | Enterprise architecture, file persistence | 5/5 | Upcoming |
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)
@@ -89,10 +89,10 @@ cd java-project-roadmap
 ```
 
 ### Execution
-Compile and run any unlocked project module. For example, to build and run the Campus Media Lending Hub:
+Compile and run any unlocked project module. For example, to build and run the Campus Resource Lending Hub:
 
 ```bash
-cd projects/07-library-system-v1
+cd projects/07-campus-lending-hub
 mkdir -p bin
 javac -d bin $(find src -name "*.java")
 java -cp bin library.app.Main
@@ -101,7 +101,7 @@ java -cp bin library.app.Main
 Alternatively, to compile and run the NeoBank Digital Wallet management console:
 
 ```bash
-cd projects/06-bank-account
+cd projects/06-neobank-digital-wallet
 mkdir -p bin
 javac -d bin src/*.java
 java -cp bin BankApp
@@ -114,27 +114,27 @@ java-project-roadmap/
 ├── docs/
 │   └── PROJECT_TEMPLATE.md
 └── projects/
-    ├── 01-hello-toolchain/
+    ├── 01-campus-utility-toolkit/
     │   ├── README.md
     │   └── src/
-    ├── 02-number-guessing-game/
+    ├── 02-security-vault-cracker/
     │   ├── README.md
     │   └── src/
-    ├── 03-menu-gradebook/
+    ├── 03-academic-transcript-portal/
     │   ├── README.md
     │   └── src/
-    ├── 04-array-toolkit/
+    ├── 04-audio-waveform-analyzer/
     │   ├── README.md
     │   └── src/
-    ├── 05-student-registry/
+    ├── 05-collegiate-advising-system/
     │   ├── README.md
     │   └── src/
-    ├── 06-bank-account/
+    ├── 06-neobank-digital-wallet/
     │   ├── README.md
     │   └── src/
-    ├── 07-library-system-v1/
+    ├── 07-campus-lending-hub/
     │   ├── README.md
     │   ├── uml.md
     │   └── src/
-    └── 08-text-analyzer/ ... 14-campus-management-capstone/
+    └── 08-text-intelligence-engine/ ... 14-campus-erp-capstone/
 ```

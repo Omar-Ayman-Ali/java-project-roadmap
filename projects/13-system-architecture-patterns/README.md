@@ -1,6 +1,6 @@
-# 13 · Patterns Playground
+# System Architecture Patterns (Creational and Behavioral Patterns)
 
-**Unlocked by:** Week 9 (Design Patterns) · **Difficulty:** ★★★★☆ · **Time:** ~6-8 hours
+**Unlocked by:** Week 9 (Design Patterns) · **Difficulty:** 4/5 · **Time:** ~6-8 hours
 
 ## Goal
 Implement four classic design patterns in small, focused demos. Each one is a retrofit of an earlier project, so you feel the problem the pattern solves.

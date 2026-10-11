@@ -1,6 +1,6 @@
-# 10 · Safe Calculator
+# Resilient Financial Calculator (Exception Handling and Javadoc)
 
-**Unlocked by:** Week 5 (Exception Handling, JavaDocs) · **Difficulty:** ★★★☆☆ · **Time:** ~4 hours
+**Unlocked by:** Week 5 (Exception Handling, JavaDocs) · **Difficulty:** 3/5 · **Time:** ~4 hours
 
 ## Goal
 A calculator that never crashes. Bad input and bad math get handled with exceptions, and the whole API is documented with Javadoc.

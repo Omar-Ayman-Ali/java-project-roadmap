@@ -1,4 +1,4 @@
-# Number Guessing Game (Vault Cracker and Proximity Sonar)
+# Cyber Vault Security Cracker (Control Flow and Loops)
 
 **Live Demo:** Not deployed (local execution only)
 
@@ -54,8 +54,8 @@ The application runs inside a two-tier nested loop structure:
 - **Fault-Tolerant Input Stream**: Employs `continue` to intercept invalid characters and out-of-range inputs without penalizing attempt shields.
 - **Replay Continuity**: Leverages a post-test `do-while` loop to cleanly restart or exit game sessions.
 
-### Project Assignment: Make Project Vault Cracker Game
-Make a project called `Cybersecurity Vault Cracker` where the player attempts to crack a secure 1-to-100 numerical vault passcode using bounded attempts and intelligent sensor clues.
+### Project Assignment: Make Project Cyber Vault Security Cracker
+Make a project called `Cyber Vault Security Cracker` where the player attempts to crack a secure 1-to-100 numerical vault passcode using bounded attempts and intelligent sensor clues.
 
 Specifically, you need to build:
 1. `NumberGuessingGame.java`: A complete game program with a console loop.
@@ -115,7 +115,7 @@ Calling `scanner.nextInt()` on non-integer input triggers an `InputMismatchExcep
 Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
-cd java-project-roadmap/projects/02-number-guessing-game
+cd java-project-roadmap/projects/02-security-vault-cracker
 ```
 
 ### Execution
@@ -128,7 +128,7 @@ java -cp bin NumberGuessingGame
 
 ## Project Structure
 ```
-02-number-guessing-game/
+02-security-vault-cracker/
 ├── README.md
 └── src/
     └── NumberGuessingGame.java

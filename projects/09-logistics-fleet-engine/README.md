@@ -1,6 +1,6 @@
-# 09 · Shapes & Vehicles
+# Logistics Fleet Engine (Inheritance and Polymorphism)
 
-**Unlocked by:** Week 4 (Inheritance, Polymorphism) · **Difficulty:** ★★★☆☆ · **Time:** ~5 hours
+**Unlocked by:** Week 4 (Inheritance, Polymorphism) · **Difficulty:** 3/5 · **Time:** ~5 hours
 
 ## Goal
 Build two small hierarchies, one for shapes and one for vehicles, and use polymorphism to treat different objects uniformly.

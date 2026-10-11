@@ -1,4 +1,4 @@
-# Library System v1 (Multi-Package Architecture and Lending Hub)
+# Campus Resource Lending Hub (Multi-Package Architecture and UML)
 
 **Live Demo:** Not deployed (local execution only)
 
@@ -49,8 +49,8 @@ The system architectural contract is documented in [`uml.md`](uml.md).
 - **Array Contiguity Compaction**: Shifts array elements sequentially upon book return to eliminate empty interior null gaps.
 - **Interactive Lending Desk**: Delivers a full CLI menu for librarians to register members, add books, and process loans.
 
-### Project Assignment: Make Project Library System v1
-Make a project called `Campus Media and Tech Lending Hub` that implements a multi-package resource lending system following an initial Unified Modeling Language (UML) class design.
+### Project Assignment: Make Project Campus Resource Lending Hub
+Make a project called `Campus Resource Lending Hub` that implements a multi-package resource lending system following an initial Unified Modeling Language (UML) class design.
 
 Specifically, you need to build:
 1. `uml.md`: A formal UML design document detailing class compartments, visibility notation (`+`, `-`), and aggregation relationships before writing code.
@@ -123,7 +123,7 @@ When a member returns a book from their borrowed array (`Book[3]`), removing an 
 Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
-cd java-project-roadmap/projects/07-library-system-v1
+cd java-project-roadmap/projects/07-campus-lending-hub
 ```
 
 ### Execution
@@ -136,7 +136,7 @@ java -cp bin library.app.Main
 
 ## Project Structure
 ```
-07-library-system-v1/
+07-campus-lending-hub/
 ├── README.md
 ├── uml.md
 └── src/

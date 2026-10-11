@@ -1,6 +1,6 @@
-# 12 · Task Manager
+# Enterprise Workflow Queue (Collections and Generics)
 
-**Unlocked by:** Week 8 (Lists, Generics, Streams) · **Difficulty:** ★★★★☆ · **Time:** ~6 hours
+**Unlocked by:** Week 8 (Lists, Generics, Streams) · **Difficulty:** 4/5 · **Time:** ~6 hours
 
 ## Goal
 A to-do manager that outgrows fixed-size arrays. Use collections for storage and streams for querying.

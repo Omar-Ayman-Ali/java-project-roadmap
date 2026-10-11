@@ -1,4 +1,4 @@
-# Array Toolkit (Digital Audio and Signal Analyzer)
+# Audio Waveform Analyzer (Reference Arrays and Sorting)
 
 **Live Demo:** Not deployed (local execution only)
 
@@ -47,8 +47,8 @@ When an array reference is assigned (`alias = rawAudioSignal`), only the pointer
 - **In-Place Bubble Sort**: Orders sound frequencies ascendingly with an early-termination optimization flag.
 - **ASCII Waveform Visualizer**: Renders sound amplitude levels as graphical console bar charts.
 
-### Project Assignment: Make Project Array Toolkit
-Make a project called `Digital Audio Signal and Waveform Analyzer` that implements a static utility class of fundamental array algorithms and an interactive driver demonstrating array memory semantics.
+### Project Assignment: Make Project Audio Waveform Analyzer
+Make a project called `Audio Waveform Analyzer` that implements a static utility class of fundamental array algorithms and an interactive driver demonstrating array memory semantics.
 
 Specifically, you need to build:
 1. `ArrayToolkit.java`: A class containing static utility methods and an illustrative `main` test driver.
@@ -132,7 +132,7 @@ Unlike C or C++, Java guarantees zero-initialization for all heap allocations:
 Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
-cd java-project-roadmap/projects/04-array-toolkit
+cd java-project-roadmap/projects/04-audio-waveform-analyzer
 ```
 
 ### Execution
@@ -145,7 +145,7 @@ java -cp bin ArrayToolkit
 
 ## Project Structure
 ```
-04-array-toolkit/
+04-audio-waveform-analyzer/
 ├── README.md
 └── src/
     └── ArrayToolkit.java

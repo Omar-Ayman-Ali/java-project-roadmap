@@ -1,4 +1,4 @@
-# Menu-Driven Gradebook (Academic Transcript and Honors Portal)
+# Academic Transcript Portal (Arrays and Branching Logic)
 
 **Live Demo:** Not deployed (local execution only)
 
@@ -46,8 +46,8 @@ The application separates total allocated array capacity from active enrollment 
 - **Honors Classification**: Converts continuous percentages into letter grades (`A`, `B`, `C`, `D`, `F`) and descriptive academic standings.
 - **Selective Criteria Filtering**: Isolates passing marks (score >= 50.0) from remedial course records.
 
-### Project Assignment: Make Project Menu Gradebook
-Make a project called `Academic Transcript and Honors Portal` that manages up to 30 course records in memory using parallel arrays and an interactive menu.
+### Project Assignment: Make Project Academic Transcript Portal
+Make a project called `Academic Transcript Portal` that manages up to 30 course records in memory using parallel arrays and an interactive menu.
 
 Specifically, you need to build:
 1. `Gradebook.java`: The primary application class containing the interactive console loop.
@@ -125,7 +125,7 @@ Because the conditions execute sequentially, once a match is found, all subseque
 Clone the repository and enter the project folder:
 ```bash
 git clone https://github.com/Omar-Ayman-Ali/java-project-roadmap.git
-cd java-project-roadmap/projects/03-menu-gradebook
+cd java-project-roadmap/projects/03-academic-transcript-portal
 ```
 
 ### Execution
@@ -138,7 +138,7 @@ java -cp bin Gradebook
 
 ## Project Structure
 ```
-03-menu-gradebook/
+03-academic-transcript-portal/
 ├── README.md
 └── src/
     └── Gradebook.java
