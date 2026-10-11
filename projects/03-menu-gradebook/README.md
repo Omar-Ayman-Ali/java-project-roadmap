@@ -12,6 +12,7 @@ A menu-driven academic transcript portal managing course grades, honors classifi
 - [About](#about)
 - [Architecture](#architecture)
 - [Features](#features)
+- [Detailed Project Explanation](#detailed-project-explanation)
 - [Tech Stack](#tech-stack)
 - [Run Locally](#run-locally)
 - [Project Structure](#project-structure)
@@ -45,6 +46,23 @@ The application separates total allocated array capacity from active enrollment 
 - **Honors Classification**: Converts continuous percentages into letter grades (`A`, `B`, `C`, `D`, `F`) and descriptive academic standings.
 - **Selective Criteria Filtering**: Isolates passing marks (score >= 50.0) from remedial course records.
 
+### Project Assignment: Make Project Menu Gradebook
+Make a project called `Academic Transcript and Honors Portal` that manages up to 30 course records in memory using parallel arrays and an interactive menu.
+
+Specifically, you need to build:
+1. `Gradebook.java`: The primary application class containing the interactive console loop.
+2. Parallel array allocation: Allocate `String[] courseNames = new String[30]` and `double[] grades = new double[30]` on the heap.
+3. Logical count tracker: Maintain an integer variable `int count = 0` that increments each time a valid course is recorded, keeping track of active items separately from the array length of 30.
+4. Menu dispatch using `switch`: Provide options for:
+   - Option 1: Add a new course name and numerical score (with bounds validation 0.0 to 100.0).
+   - Option 2: Display the formatted transcript of all enrolled courses.
+   - Option 3: Compute aggregate statistics (average score, highest score, lowest score, and pass rate percentage).
+   - Option 4: Convert numerical marks to letter grades (A, B, C, D, F) with collegiate academic standing descriptions.
+   - Option 5: Filter and display only courses where the score is at or above 50.0.
+   - Option 0: Terminate the application gracefully.
+5. Capacity overflow guard: Verify `count < 30` before accepting new records, alerting the user politely if the transcript capacity is full.
+6. Range evaluation with `if-else if`: Use chained conditional branches for score boundaries (A >= 90, B >= 80, C >= 70, D >= 60, F < 60).
+
 ### What You Need To Do
 - [x] Create an interactive menu loop offering options to add grades, view transcripts, inspect statistics, display honors, filter passing courses, and exit.
 - [x] Allocate fixed-size arrays for course names and scores with a capacity of 30, tracking active records with a separate integer variable.
@@ -55,6 +73,40 @@ The application separates total allocated array capacity from active enrollment 
 ### Hands-On Practice Challenges
 - Challenge 1: Introduce credit hours per course (e.g., 3 or 4 credits) and calculate a weighted grade point average.
 - Challenge 2: Implement a search feature that prompts for a course title keyword and prints matching course entries.
+
+## Detailed Project Explanation
+
+### 1. Fixed-Size Arrays and Memory Pre-Allocation
+In Java, arrays are fixed-length containers created on the heap. When you write `new double[30]`, Java allocates contiguous memory for exactly 30 double-precision numbers, each pre-initialized to `0.0`. You cannot dynamically shrink or expand this array at runtime.
+
+### 2. Logical Count vs Physical Capacity
+Because all 30 array slots exist immediately upon allocation, you must never rely solely on `grades.length` when computing averages or listing records. If a student has completed only 3 courses, reading all 30 elements would factor 27 unused zero-marks into the calculations, heavily distorting the average. Maintaining an independent integer variable `count` ensures your program traverses strictly the active, populated slice of data (`i < count`).
+
+### 3. Command Routing with Switch
+The `switch` statement provides clean, multi-way branch selection based on a single discrete variable (such as an `int` menu choice):
+- Each option is enclosed in a `case` label.
+- Every `case` block must conclude with a `break;` statement. Omitting `break` triggers fall-through, executing subsequent case blocks unintentionally.
+- The `default:` block catches any unrecognized numbers typed by the user, providing a resilient fallback.
+
+### 4. Continuous Range Categorization with If-Else
+While `switch` is ideal for discrete numbers, it cannot evaluate range conditions like `score >= 90.0`. Chaining `if ... else if ... else` statements allows you to test ordered intervals from highest to lowest:
+```java
+if (g >= 90.0) {
+    letter = 'A';
+} else if (g >= 80.0) {
+    letter = 'B';
+} else if (g >= 70.0) {
+    letter = 'C';
+} else if (g >= 60.0) {
+} else {
+    letter = 'F';
+}
+```
+Because the conditions execute sequentially, once a match is found, all subsequent `else if` checks are skipped.
+
+### 5. Indexed For vs Enhanced For (Foreach)
+- Use indexed `for (int i = 0; i < count; i++)` when you need the index number (e.g., printing `Course #1`, `Course #2`), or when coordinating between parallel arrays (`courseNames[i]` and `grades[i]`).
+- Use enhanced `for (double g : activeGrades)` when reading data sequentially without needing to modify values or track indices.
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)

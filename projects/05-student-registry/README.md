@@ -12,6 +12,7 @@ An object-oriented student registry modeling collegiate academic records, constr
 - [About](#about)
 - [Architecture](#architecture)
 - [Features](#features)
+- [Detailed Project Explanation](#detailed-project-explanation)
 - [Tech Stack](#tech-stack)
 - [Run Locally](#run-locally)
 - [Project Structure](#project-structure)
@@ -51,6 +52,22 @@ The system consists of two collaborating classes:
 - **Highest GPA Discovery**: Identifies the valedictorian across registered cohort members.
 - **Sparse Array Null-Safety**: Demonstrates defensive reference checking to prevent runtime `NullPointerException` failures.
 
+### Project Assignment: Make Project Student Registry
+Make a project called `Collegiate Academic Advising Registry` that models student entities and manages them in a registry coordinator while practicing class blueprints, constructor overloading, and object array null-safety.
+
+Specifically, you need to build:
+1. `Student.java`: An entity class modeling student academic state.
+   - Private attributes: `id` (integer), `name` (String), `major` (String), `gpa` (double), and `creditsEarned` (integer).
+   - Overloaded Constructor 1: `Student(name, id)` initializes name and ID, defaulting major to "Computer Science & AI", GPA to 0.0, and credits to 0.
+   - Overloaded Constructor 2: `Student(name, id, major, gpa, credits)` initializes all attributes while validating that GPA is clamped between 0.0 and 4.0.
+   - Constructor chaining: Use `this(...)` inside Constructor 1 to forward parameters to Constructor 2.
+   - Public member methods: `updateGpa(double)`, `addCredits(int)`, `getAcademicStanding()` (returning "Dean's List (Honors)" for GPA >= 3.5, "Good Standing" for GPA >= 2.0, or "Academic Probation" otherwise), `isGraduationEligible()`, and a formatted `toString()`.
+2. `StudentRegistry.java`: A coordinator class managing a fixed-size `Student[]` array.
+   - Private fields: `Student[] students` and `int count`.
+   - Constructor: `StudentRegistry(int capacity)` allocating the array and initializing `count` to 0.
+   - Methods: `addStudent(Student s)` with capacity limit checks and duplicate ID prevention; `findById(int id)` using safe linear search; `filterByMajor(String query)` printing all matching students; `getTopStudent()` returning the student with the highest GPA; and `listAll()`.
+3. Execution driver: A `main` method demonstrating object creation with `new`, calling instance methods via the dot operator (`s1.updateGpa(3.60)`), and explicitly demonstrating safe checks against unassigned `null` array slots.
+
 ### What You Need To Do
 - [x] Create the `Student` entity class with fields for ID, name, major, GPA, and credits earned.
 - [x] Implement overloaded constructors and delegate defaults using `this(...)`.
@@ -62,6 +79,33 @@ The system consists of two collaborating classes:
 ### Hands-On Practice Challenges
 - Challenge 1: Implement a `removeStudent(int id)` method in `StudentRegistry` that deletes a student and shifts trailing array elements to maintain contiguity.
 - Challenge 2: Add a `countHonorStudents()` method that calculates the percentage of enrolled students holding a GPA >= 3.5.
+
+## Detailed Project Explanation
+
+### 1. Classes vs Objects
+In Java, a class is a blueprint or template defined in source code, while an object is a concrete instance living in heap memory:
+- The `Student` class defines the shape: what state every student will possess (`name`, `gpa`) and what behaviors they can execute (`updateGpa()`).
+- Writing `Student s1 = new Student("Alice", 101);` creates a new instance on the heap and assigns its memory address to reference variable `s1`.
+
+### 2. Information Hiding (Encapsulation)
+Encapsulation bundles data attributes and methods together while restricting direct access to object internals:
+- All fields in `Student` are marked `private`. If fields were public, outside code could write `s1.gpa = -50.0;` or `s1.gpa = 999.0;`, placing the object in an invalid state.
+- By exposing access solely through methods like `updateGpa(double)`, the class enforces validation invariants: `this.gpa = Math.max(0.0, Math.min(4.0, newGpa));`.
+
+### 3. Constructor Mechanics and Compiler Defaults
+- Constructors have no return type and share the exact name of their class.
+- When you do not write any constructors in a class, the Java compiler automatically creates an invisible, no-argument default constructor.
+- The moment you define any custom constructor (such as `Student(String, int)`), the compiler retracts the automatic default constructor. If you still want a no-arg constructor, you must code it explicitly.
+
+### 4. Constructor Delegation with this(...)
+When writing multiple constructors (constructor overloading), avoid duplicating validation and assignment logic across each one:
+- In `Student(String name, int id)`, you can write `this(name, id, "Computer Science & AI", 0.0, 0);`.
+- The `this(...)` call must be the very first statement in the constructor body. It routes execution directly into the primary 5-parameter constructor.
+
+### 5. Object Arrays and Null Reference Protection
+Allocating an object array like `new Student[6]` allocates space for 6 reference pointers on the heap, each default-initialized to `null`. It does not create any `Student` objects:
+- If index 5 is empty and you write `students[5].getGpa()`, the JVM attempts to dereference a `null` address and throws a `NullPointerException`.
+- Always check `if (students[i] != null)` or iterate strictly up to the active populated count (`i < count`).
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)

@@ -12,6 +12,7 @@ A utility library modeling digital audio waveform processing to demonstrate arra
 - [About](#about)
 - [Architecture](#architecture)
 - [Features](#features)
+- [Detailed Project Explanation](#detailed-project-explanation)
 - [Tech Stack](#tech-stack)
 - [Run Locally](#run-locally)
 - [Project Structure](#project-structure)
@@ -46,6 +47,23 @@ When an array reference is assigned (`alias = rawAudioSignal`), only the pointer
 - **In-Place Bubble Sort**: Orders sound frequencies ascendingly with an early-termination optimization flag.
 - **ASCII Waveform Visualizer**: Renders sound amplitude levels as graphical console bar charts.
 
+### Project Assignment: Make Project Array Toolkit
+Make a project called `Digital Audio Signal and Waveform Analyzer` that implements a static utility class of fundamental array algorithms and an interactive driver demonstrating array memory semantics.
+
+Specifically, you need to build:
+1. `ArrayToolkit.java`: A class containing static utility methods and an illustrative `main` test driver.
+2. `max(int[] a)` and `min(int[] a)`: Methods that throw an `IllegalArgumentException` on null or empty input and return the highest and lowest integer values respectively.
+3. `average(int[] a)`: Computes the arithmetic mean as a floating-point `double`, preventing integer truncation.
+4. `reverse(int[] a)`: Allocates and returns a fresh array containing elements in reverse order without mutating the input array.
+5. `indexOf(int[] a, int target)`: Performs a linear search and returns the first matching index, or -1 if the target is absent.
+6. `copy(int[] a)`: Allocates a new array on the heap of identical size and copies each element, creating an independent clone.
+7. `bubbleSort(int[] a)`: Sorts the array in-place using adjacent element swaps, featuring an early-exit `swapped` boolean flag to stop once the array is ordered.
+8. `renderWaveform(String label, int[] samples)`: Iterates through the sample array and prints ASCII bar charts (`#`) proportional to the magnitude of each sample.
+9. A demonstration driver in `main` that proves:
+   - Assigning `b = a` copies only the pointer reference (mutating `b` alters `a`).
+   - Using `copy(a)` allocates isolated heap memory (mutating the copy does not alter `a`).
+   - Default initialization produces zeroes for `int[]`, `false` for `boolean[]`, and `null` for `String[]`.
+
 ### What You Need To Do
 - [x] Implement static routines `max`, `min`, and `average` for non-empty integer arrays.
 - [x] Implement `reverse` returning an independent inverted array instance.
@@ -57,6 +75,45 @@ When an array reference is assigned (`alias = rawAudioSignal`), only the pointer
 ### Hands-On Practice Challenges
 - Challenge 1: Implement a `normalize(int[] a, int maxLimit)` method that scales all sample levels proportionally so the peak amplitude matches a target ceiling.
 - Challenge 2: Implement a `countPeaks(int[] a, int threshold)` method that counts how many samples exceed a given noise threshold.
+
+## Detailed Project Explanation
+
+### 1. Memory Architecture: Stack References vs Heap Objects
+In Java, variables declared inside methods reside on the method's stack frame, while all objects, including arrays, live on the heap:
+- An array variable like `int[] numbers` does not store the array elements directly on the stack.
+- Instead, `numbers` holds a 64-bit reference address pointing to the memory block on the heap where the elements are stored.
+
+### 2. The Reference Aliasing Hazard
+Because array variables are merely references:
+```java
+int[] original = {10, 20, 30};
+int[] alias = original; // Only copies the memory address!
+alias[0] = 999;
+System.out.println(original[0]); // Prints 999!
+```
+Both `alias` and `original` point to the exact same heap memory block. This is called aliasing. If one part of your program alters the array through an alias, every other reference observing that array sees the mutation.
+
+### 3. Deep Copying for Data Isolation
+To safely process or sort data without corrupting the original recording, you must perform a deep copy:
+```java
+int[] clone = new int[original.length];
+for (int i = 0; i < original.length; i++) {
+    clone[i] = original[i];
+}
+```
+The `new` keyword reserves a separate block of memory on the heap. Now, modifying `clone` has zero side effects on `original`.
+
+### 4. Bubble Sort Mechanics
+Bubble sort works by repeatedly swapping adjacent elements that are out of order:
+- On each outer pass `i`, the largest unsorted element "bubbles up" to its correct position at the end of the array.
+- The inner loop compares `a[j]` and `a[j + 1]`. If `a[j] > a[j + 1]`, they are swapped using a temporary storage variable.
+- An optimization flag `boolean swapped` tracks whether any elements moved during a pass. If an entire pass completes with zero swaps, the array is already sorted, and the algorithm can terminate early via `break`.
+
+### 5. Java Default Memory Initialization
+Unlike C or C++, Java guarantees zero-initialization for all heap allocations:
+- Primitive numeric arrays (`byte[]`, `int[]`, `double[]`) are initialized with `0` or `0.0`.
+- Boolean arrays (`boolean[]`) are initialized with `false`.
+- Object and reference arrays (`String[]`, `Student[]`) are initialized with `null`.
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)

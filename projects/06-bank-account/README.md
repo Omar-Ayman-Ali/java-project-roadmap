@@ -12,6 +12,7 @@ A secure mobile digital wallet application enforcing object encapsulation, PIN s
 - [About](#about)
 - [Architecture](#architecture)
 - [Features](#features)
+- [Detailed Project Explanation](#detailed-project-explanation)
 - [Tech Stack](#tech-stack)
 - [Run Locally](#run-locally)
 - [Project Structure](#project-structure)
@@ -51,6 +52,21 @@ Memory is partitioned between per-wallet heap allocations and class-level static
 - **Institutional Liquidity Auditing**: Tracks the total money managed across all active wallets via static class fields.
 - **Interactive Console Menu**: Delivers an interactive terminal ATM interface for wallet management.
 
+### Project Assignment: Make Project Bank Account
+Make a project called `Campus NeoBank and Digital Wallet` that models a secure financial account system with strict encapsulation, PIN validation, and shared institutional metrics.
+
+Specifically, you need to build:
+1. `BankAccount.java`: The core wallet account entity class.
+   - Private attributes: `balance` (double), `accountNumber` (final int), `owner` (String), and `pinCode` (int).
+   - Static class fields: `totalAccounts` (tracking total active wallets), `totalMoneyInBank` (tracking sum of all balances across the institution), and `accountSequence` (starting at 1000 for auto-generating IDs).
+   - Constants: `public static final double MIN_OPENING_BALANCE = 50.0;` and `public static final double MAX_TRANSFER_LIMIT = 2000.0;`.
+   - Constructor: `BankAccount(owner, initialDeposit, pinCode)` validating that owner name is not empty, initial deposit is at least $50.0, and PIN is a 4-digit number between 1000 and 9999.
+   - Member methods: `deposit(double amount)` updating balance and total institutional liquidity; `withdraw(double amount, int enteredPin)` validating PIN, rejecting negative values or overdrafts; `transfer(BankAccount destination, double amount, int enteredPin)` verifying PIN, destination presence, transfer ceilings, and fund sufficiency; and `getBalance(int enteredPin)` protecting statement lookups.
+   - Static getters: `getTotalAccounts()` and `getTotalMoneyInBank()`.
+2. `BankApp.java`: An interactive console application.
+   - Stores up to 20 accounts in a `BankAccount[]` array.
+   - Provides a menu with operations to open a new wallet, deposit money, withdraw with PIN, perform peer-to-peer transfers with PIN, check statements, and run an institutional audit displaying platform liquidity.
+
 ### What You Need To Do
 - [x] Define `BankAccount` with `private double balance`, `private final int accountNumber`, `private String owner`, and `private int pinCode`.
 - [x] Configure class constants such as `MIN_OPENING_BALANCE = 50.0` and `MAX_TRANSFER_LIMIT = 2000.0`.
@@ -62,6 +78,34 @@ Memory is partitioned between per-wallet heap allocations and class-level static
 ### Hands-On Practice Challenges
 - Challenge 1: Add a 1% promotional cashback deposit bonus whenever a deposit amount exceeds `$500.00`.
 - Challenge 2: Implement a method `changePin(int oldPin, int newPin)` that validates the old PIN before updating to a new 4-digit passcode.
+
+## Detailed Project Explanation
+
+### 1. Encapsulation and Data Hiding
+Encapsulation prevents direct external manipulation of an object's internal fields:
+- If `balance` were declared public, any part of the codebase could alter it directly without passing through business rules.
+- By making `balance` private, you guarantee that deposits and withdrawals always pass through validation logic, ensuring balances cannot become negative or corrupted.
+
+### 2. The Static Modifier: Class-Level vs Instance-Level Memory
+Java partitions memory between instance variables and static variables:
+- **Instance Variables** (`owner`, `balance`): Each `BankAccount` object gets its own private copy stored on the heap. Changing Alice's balance does not affect Bob's balance.
+- **Static Variables** (`totalAccounts`, `totalMoneyInBank`): Only a single shared copy exists in class metadata memory. Every instantiated object shares and observes the exact same variable. When a deposit occurs on any account, `totalMoneyInBank` increments globally.
+
+### 3. The Final Keyword and Immutability
+Declaring `private final int accountNumber` makes the account number immutable:
+- A `final` blank field can only be assigned once, either at declaration or within the constructor.
+- Once set during account opening, Java prevents any subsequent code from reassigning or altering the account number, ensuring lifelong identity integrity.
+
+### 4. PIN Security and Invariant Guards
+Every critical transaction requires user authentication:
+- `withdraw` and `transfer` mandate an `enteredPin` parameter. If `!verifyPin(enteredPin)`, the operation terminates immediately before modifying balances.
+- Invariants guard boundaries: deposits must be positive (`amount > 0`), withdrawals cannot exceed balance (`amount <= balance`), and transfers cannot exceed the institutional limit (`amount <= MAX_TRANSFER_LIMIT`).
+
+### 5. Institutional Liquidity Invariant
+During an internal fund transfer between Alice and Bob:
+- Alice's account decreases by `amount`.
+- Bob's account increases by `amount`.
+- Notice that `totalMoneyInBank` remains unchanged because the money merely transferred between two vaults inside the same platform. Only external deposits and withdrawals adjust total platform liquidity.
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)

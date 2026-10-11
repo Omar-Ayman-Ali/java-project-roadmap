@@ -12,6 +12,7 @@ An engaging command-line security vault breaker practicing nested loop control, 
 - [About](#about)
 - [Architecture](#architecture)
 - [Features](#features)
+- [Detailed Project Explanation](#detailed-project-explanation)
 - [Tech Stack](#tech-stack)
 - [Run Locally](#run-locally)
 - [Project Structure](#project-structure)
@@ -53,6 +54,18 @@ The application runs inside a two-tier nested loop structure:
 - **Fault-Tolerant Input Stream**: Employs `continue` to intercept invalid characters and out-of-range inputs without penalizing attempt shields.
 - **Replay Continuity**: Leverages a post-test `do-while` loop to cleanly restart or exit game sessions.
 
+### Project Assignment: Make Project Vault Cracker Game
+Make a project called `Cybersecurity Vault Cracker` where the player attempts to crack a secure 1-to-100 numerical vault passcode using bounded attempts and intelligent sensor clues.
+
+Specifically, you need to build:
+1. `NumberGuessingGame.java`: A complete game program with a console loop.
+2. Random code generator: Configure `java.util.Random` to generate a secret integer uniformly between 1 and 100 inclusive.
+3. Security shields: Give the user an initial budget of 7 shield attempts per round, decrementing by one only on valid guesses.
+4. Input validation and recovery: Use `scanner.hasNextInt()` to check input. If the input is not a number, or if the number is outside 1 to 100, print a warning and use `continue` to skip the rest of the loop without subtracting a shield.
+5. Win detection: If the guess matches the passcode, print a success message and use `break` to exit the loop immediately.
+6. Proximity sonar clues: Calculate the absolute difference `Math.abs(guess - secretCode)`. Display "BOILING HOT" if distance is within 5, "WARM" if within 15, and "COLD" otherwise, alongside the directional "Too HIGH" or "Too LOW" hint.
+7. Post-game replay prompt: After the round concludes (whether won or lost), ask the user "Play again? (y/n)" using a `do-while` loop.
+
 ### What You Need To Do
 - [x] Configure pseudorandom passcode generation in the closed range [1, 100].
 - [x] Initialize a shield counter to 7 units and decrement upon valid attempts.
@@ -64,6 +77,26 @@ The application runs inside a two-tier nested loop structure:
 ### Hands-On Practice Challenges
 - Challenge 1: Add a mission difficulty selector before the game starts (Rookie: 1 to 50 with 10 shields; Agent: 1 to 100 with 7 shields; Specialist: 1 to 200 with 5 shields).
 - Challenge 2: Implement a high score tracker that stores the lowest number of attempts used across multiple rounds within the same session.
+
+## Detailed Project Explanation
+
+### 1. Pre-Test While vs Post-Test Do-While Loops
+Java provides multiple loop structures suited for distinct control flows:
+- **`while` (Pre-test)**: Tests its condition before executing the loop body. If the condition is false initially, the body does not run at all. In this game, the inner guessing loop uses `while (shieldsRemaining > 0)` because once shields hit zero, guessing must stop immediately.
+- **`do-while` (Post-test)**: Executes the body first, then tests the condition at the bottom. This guarantees the block executes at least once. It is the textbook choice for user replay prompts: the player must play one game before being asked if they want to play again.
+
+### 2. Fine-Grained Loop Control with Break and Continue
+- **`break`**: Immediately terminates the nearest enclosing loop and resumes execution at the statement following the loop block. Here, when the player guesses the exact code, `break` terminates the `while` loop instantly, avoiding unnecessary redundant guess prompts.
+- **`continue`**: Skips the remaining statements in the current iteration and jumps directly to the loop condition evaluation. When the player enters non-numeric text or an out-of-range number (such as `150`), `continue` restarts the loop without running the decrement code (`shieldsRemaining--`), protecting the player from accidental penalties.
+
+### 3. Absolute Mathematical Distance with Math.abs()
+To provide distance-based sonar hints, you need the magnitude of the difference between the player's guess and the secret passcode:
+- `guess - secretCode` can be negative when guessing low (e.g., `20 - 50 = -30`).
+- Calling `Math.abs(guess - secretCode)` eliminates the negative sign, yielding a positive scalar distance (`30`).
+- Branching on this distance (`<= 5`, `<= 15`) enables intuitive proximity alerts.
+
+### 4. Input Stream Token Recovery
+Calling `scanner.nextInt()` on non-integer input triggers an `InputMismatchException` that halts the program. By guarding input reading with `scanner.hasNextInt()`, you safely verify the upcoming token. If it is invalid, call `scanner.next()` to consume and discard the invalid text token so subsequent reads do not get stuck on the same bad input.
 
 ## Tech Stack
 - **Language**: Java 21 (LTS)
